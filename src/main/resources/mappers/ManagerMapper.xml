@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.ManagerMapper" >
+  <resultMap id="BaseResultMap" type="com.wh.webmanager.domain.Manager" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="grade" property="grade" jdbcType="INTEGER" />
+    <result column="createperson" property="createperson" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updateperson" property="updateperson" jdbcType="VARCHAR" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="yn" property="yn" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, grade, createperson, createtime, updateperson, updatetime, yn
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from manager
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from manager
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.wh.webmanager.domain.Manager" >
+    insert into manager (id, name, grade, 
+      createperson, createtime, updateperson, 
+      updatetime, yn)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{grade,jdbcType=INTEGER}, 
+      #{createperson,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updateperson,jdbcType=VARCHAR}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{yn,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wh.webmanager.domain.Manager" >
+    insert into manager
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="grade != null" >
+        grade,
+      </if>
+      <if test="createperson != null" >
+        createperson,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="updateperson != null" >
+        updateperson,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="yn != null" >
+        yn,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="createperson != null" >
+        #{createperson,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateperson != null" >
+        #{updateperson,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="yn != null" >
+        #{yn,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wh.webmanager.domain.Manager" >
+    update manager
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        grade = #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="createperson != null" >
+        createperson = #{createperson,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateperson != null" >
+        updateperson = #{updateperson,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="yn != null" >
+        yn = #{yn,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wh.webmanager.domain.Manager" >
+    update manager
+    set name = #{name,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=INTEGER},
+      createperson = #{createperson,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updateperson = #{updateperson,jdbcType=VARCHAR},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      yn = #{yn,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
