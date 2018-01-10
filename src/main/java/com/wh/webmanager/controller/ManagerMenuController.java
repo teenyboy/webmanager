@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping(value = "/menu",method = {RequestMethod.GET,RequestMethod.POST})
-public class MenuController {
+public class ManagerMenuController {
 
     @RequestMapping(value = "/")
     public String menu(){

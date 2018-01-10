@@ -2,7 +2,7 @@ package com.wh.webmanager.domain;
 
 import java.util.Date;
 
-public class Manager {
+public class ManagerMenu {
     private Long id;
 
     private String name;

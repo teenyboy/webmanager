@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="dao.ManagerMapper" >
-  <resultMap id="BaseResultMap" type="com.wh.webmanager.domain.Manager" >
+<mapper namespace="com.wh.webmanager.dao.ManagerMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.wh.webmanager.domain.ManagerMenu" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="grade" property="grade" jdbcType="INTEGER" />
@@ -17,23 +17,23 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from manager
+    from managermenu
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from manager
+    delete from managermenu
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.wh.webmanager.domain.Manager" >
-    insert into manager (id, name, grade, 
+  <insert id="insert" parameterType="com.wh.webmanager.domain.ManagerMenu" >
+    insert into managermenu (id, name, grade,
       createperson, createtime, updateperson, 
       updatetime, yn)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{grade,jdbcType=INTEGER}, 
       #{createperson,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updateperson,jdbcType=VARCHAR}, 
       #{updatetime,jdbcType=TIMESTAMP}, #{yn,jdbcType=TINYINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.wh.webmanager.domain.Manager" >
-    insert into manager
+  <insert id="insertSelective" parameterType="com.wh.webmanager.domain.ManagerMenu" >
+    insert into managermenu
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -87,8 +87,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wh.webmanager.domain.Manager" >
-    update manager
+  <update id="updateByPrimaryKeySelective" parameterType="com.wh.webmanager.domain.ManagerMenu" >
+    update managermenu
     <set >
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
@@ -114,8 +114,8 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.wh.webmanager.domain.Manager" >
-    update manager
+  <update id="updateByPrimaryKey" parameterType="com.wh.webmanager.domain.ManagerMenu" >
+    update managermenu
     set name = #{name,jdbcType=VARCHAR},
       grade = #{grade,jdbcType=INTEGER},
       createperson = #{createperson,jdbcType=VARCHAR},
