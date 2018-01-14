@@ -1,6 +1,7 @@
 package com.wh.webmanager.controller;
 
 import com.wh.webmanager.domain.ManagerMenu;
+import com.wh.webmanager.domain.enums.YnEnum;
 import com.wh.webmanager.service.ManagerMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,9 @@ public class IndexController {
     @RequestMapping(value = "/{name}")
     public String index(@PathVariable String name, Model model){
 
-        List<ManagerMenu> managerMenus = managerMenuService.queryManagerMenus();
+        ManagerMenu managerMenu = new ManagerMenu();
+        managerMenu.setYn(YnEnum.Y.getValue());
+        List<ManagerMenu> managerMenus = managerMenuService.queryManagerMenuDataTables(managerMenu);
         model.addAttribute("name",name);
         model.addAttribute("managerMenus",managerMenus);
         return "default";

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="default">
+<head>
+    <!-- wh -->
+    <script th:src="@{/js/menumanager.js}"></script>
+    <script>
+        $(document).ready(function () {
+            MENUMANAGER.queryMenus();
+        });
+    </script>
+    <!-- wh -->
+</head>
+<body>
+<div layout:fragment="content" style="width: auto;height: auto;">
+
+    <div>
+        <button type="button" class="btn btn-info" onclick="MENUMANAGER.newMenuOpen();">
+            新增模块
+        </button>
+    </div>
+    <div class="box" style="margin-top: 20px">
+        <div class="box-header">
+            <h3 class="box-title">Hover Data Table</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="dataTables_wrapper form-inline dt-bootstrap">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table id="menusDataTables"
+                               class="display table-striped table-bordered table-hover table-condensed" cellspacing="0"
+                               width="100%">
+                            <thead>
+                            <tr align="center">
+                                <th width="10%" data-field="id">id</th>
+                                <th width="60%" data-field="name">名称</th>
+                                <th width="10%" data-field="grade">序号</th>
+                                <th width="20%" data-field="id" data-formatter="MENUMANAGER.operation">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:include="sys/menu/newmenu :: newMenu"></div>
+</div>
+</body>
+</html>

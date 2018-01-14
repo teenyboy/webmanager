@@ -20,6 +20,15 @@ public interface ManagerMenuMapper {
 
     int updateByPrimaryKey(ManagerMenu record);
 
-    @Select("select * from managermenu")
-    List<ManagerMenu> queryManagerMenus();
+    @Select("select max(grade) from managermenu where yn = 1")
+    Integer queryManagerMenuMaxGrade();
+
+    Integer queryManagerMenuCount(ManagerMenu managerMenu);
+
+    List<ManagerMenu> queryManagerMenus(ManagerMenu managerMenu);
+
+    @Select("select * from managermenu where grade >= #{grade} and yn = 1")
+    List<ManagerMenu> queryMoreGradeManagerMenus(Integer grade);
+
+    void updateMoreGradeList(List<ManagerMenu> managerMenus);
 }

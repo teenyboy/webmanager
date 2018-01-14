@@ -2,10 +2,12 @@ package com.wh.webmanager.domain;
 
 import java.util.Date;
 
-public class ManagerMenu {
+public class ManagerMenu extends QueryParams{
     private Long id;
 
     private String name;
+
+    private String link;
 
     private Integer grade;
 
@@ -33,6 +35,14 @@ public class ManagerMenu {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link == null ? null : link.trim();
     }
 
     public Integer getGrade() {
