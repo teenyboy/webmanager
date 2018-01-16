@@ -1,5 +1,6 @@
 package com.wh.webmanager.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.wh.webmanager.domain.ManagerMenu;
 import com.wh.webmanager.domain.QueryParams;
 import com.wh.webmanager.domain.ServiceResult;
@@ -17,8 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping(value = "/menu",method = {RequestMethod.GET,RequestMethod.POST})
-public class ManagerMenuController extends BaseController{
+@RequestMapping(value = "/menu", method = {RequestMethod.GET, RequestMethod.POST})
+public class ManagerMenuController extends BaseController {
 
     private static final Logger logger = LoggerFactory.getLogger("ManagerMenuController.class");
 
@@ -26,30 +27,71 @@ public class ManagerMenuController extends BaseController{
     private ManagerMenuService managerMenuService;
 
     @RequestMapping(value = "/")
-    public String menu(){
+    public String menu() {
         return "/sys/menu/menumanager";
     }
 
     @ResponseBody
     @RequestMapping(value = "/queryMenus")
-    public Map<String, Object> queryMenus(ManagerMenu managerMenu){
+    public Map<String, Object> queryMenus(ManagerMenu managerMenu) {
         managerMenu.setYn(YnEnum.Y.getValue());
         List<ManagerMenu> managerMenus = managerMenuService.queryManagerMenuDataTables(managerMenu);
         managerMenu.setRecordsTotal(managerMenuService.queryManagerMenuCount(managerMenu));
-        return toDataTable(managerMenus,managerMenu);
+        return toDataTable(managerMenus, managerMenu);
     }
 
     @ResponseBody
-    @RequestMapping(value = "/newMenu")
-    public String newMenu(ManagerMenu managerMenu){
-        ServiceResult serviceResult = new ServiceResult(false);
+    @RequestMapping(value = "/delMenus")
+    public String delMenus(Long id) {
+        ServiceResult serviceResult;
         try {
-            managerMenuService.insertManagerMenus(managerMenu);
-            serviceResult.setResult(true);
-            serviceResult.setMsg("新增成功");
-        }catch (Exception e){
-            logger.error("新增模块失败",e);
-            serviceResult.setMsg("新增失败");
+            managerMenuService.deleteByPrimaryKey(id);
+            serviceResult = new ServiceResult(true, "删除成功");
+        } catch (Exception e) {
+            logger.error("删除模块失败", e);
+            serviceResult = new ServiceResult(false, "删除失败");
+        }
+        return toResult(serviceResult);
+    }
+
+    @ResponseBody
+    @RequestMapping("/queryMenuById")
+    public String queryMenuById(Long id){
+        ServiceResult serviceResult;
+        ManagerMenu managerMenu = managerMenuService.queryMenuById(id);
+        if(managerMenu == null){
+            serviceResult = new ServiceResult(false, "查询失败");
+        }else{
+            serviceResult = new ServiceResult(true, JSON.toJSONString(managerMenu));
+        }
+        return toResult(serviceResult);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/addOrUpdateMenu")
+    public String addOrUpdateMenu(ManagerMenu managerMenu, String opertionStyle) {
+        ServiceResult serviceResult;
+        try {
+
+            if (!opertionStyle.equals("add") && !opertionStyle.equals("update")) {
+                serviceResult = new ServiceResult(false, "操作失败");
+                return toResult(serviceResult);
+            }
+            if (opertionStyle.equals("add")) {
+                managerMenuService.insertManagerMenus(managerMenu);
+                serviceResult = new ServiceResult(true, "新增成功");
+            } else {
+                managerMenuService.updateByPrimaryKeySelective(managerMenu);
+                serviceResult = new ServiceResult(true, "更新成功");
+            }
+        } catch (Exception e) {
+            if (opertionStyle.equals("add")) {
+                logger.error("新增模块失败", e);
+                serviceResult = new ServiceResult(false, "新增失败");
+            } else {
+                logger.error("更新模块失败", e);
+                serviceResult = new ServiceResult(false, "更新失败");
+            }
         }
         return toResult(serviceResult);
     }

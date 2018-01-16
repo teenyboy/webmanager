@@ -13,6 +13,20 @@ public interface ManagerMenuService {
     public void insertManagerMenus(ManagerMenu managerMenu);
 
     /**
+     * 更新模块
+     * @param record
+     * @return
+     */
+    public Integer updateByPrimaryKeySelective(ManagerMenu record);
+
+    /**
+     * 根据id查询栏目
+     * @param id
+     * @return
+     */
+    public ManagerMenu queryMenuById(Long id);
+
+    /**
      * 查询模块填充列表
      * @param managerMenu
      * @return
@@ -25,4 +39,13 @@ public interface ManagerMenuService {
      * @return
      */
     public Integer queryManagerMenuCount(ManagerMenu managerMenu);
+
+    /**
+     * 删除模块
+     * @param id
+     * @return
+     */
+    public Integer deleteByPrimaryKey(Long id);
+
+
 }

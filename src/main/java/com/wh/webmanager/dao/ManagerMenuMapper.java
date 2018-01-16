@@ -3,9 +3,11 @@ package com.wh.webmanager.dao;
 import com.wh.webmanager.domain.ManagerMenu;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 @Mapper
 public interface ManagerMenuMapper {
     int deleteByPrimaryKey(Long id);
@@ -31,4 +33,7 @@ public interface ManagerMenuMapper {
     List<ManagerMenu> queryMoreGradeManagerMenus(Integer grade);
 
     void updateMoreGradeList(List<ManagerMenu> managerMenus);
+
+    @Select("select * from managermenu where id = #{id} and yn = 1")
+    ManagerMenu queryMenuById(Long id);
 }

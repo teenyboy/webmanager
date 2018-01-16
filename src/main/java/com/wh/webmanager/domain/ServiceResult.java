@@ -8,6 +8,11 @@ public class ServiceResult {
     public ServiceResult() {
     }
 
+    public ServiceResult(Boolean result, String msg) {
+        this.result = result;
+        this.msg = msg;
+    }
+
     public ServiceResult(Boolean result) {
         this.result = result;
     }

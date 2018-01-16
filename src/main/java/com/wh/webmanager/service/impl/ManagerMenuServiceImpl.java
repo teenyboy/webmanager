@@ -49,5 +49,20 @@ public class ManagerMenuServiceImpl implements ManagerMenuService {
         return managerMenuMapper.queryManagerMenuCount(managerMenu);
     }
 
+    @Override
+    public Integer deleteByPrimaryKey(Long id) {
+        return managerMenuMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public Integer updateByPrimaryKeySelective(ManagerMenu record) {
+        return managerMenuMapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public ManagerMenu queryMenuById(Long id) {
+        return managerMenuMapper.queryMenuById(id);
+    }
+
 
 }

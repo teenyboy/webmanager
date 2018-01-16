@@ -8,6 +8,10 @@
     <script>
         $(document).ready(function () {
             MENUMANAGER.queryMenus();
+
+            $("#newMenuModal").on("hidden.bs.modal",function () {
+                MENUMANAGER.clear();
+            });
         });
     </script>
     <!-- wh -->
@@ -22,7 +26,7 @@
     </div>
     <div class="box" style="margin-top: 20px">
         <div class="box-header">
-            <h3 class="box-title">Hover Data Table</h3>
+            <h3 class="box-title">栏目管理</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -35,9 +39,9 @@
                             <thead>
                             <tr align="center">
                                 <th width="10%" data-field="id">id</th>
-                                <th width="60%" data-field="name">名称</th>
+                                <th width="65%" data-field="name">名称</th>
                                 <th width="10%" data-field="grade">序号</th>
-                                <th width="20%" data-field="id" data-formatter="MENUMANAGER.operation">操作</th>
+                                <th width="15%" data-field="id" data-formatter="MENUMANAGER.operation">操作</th>
                             </tr>
                             </thead>
                             <tbody>
