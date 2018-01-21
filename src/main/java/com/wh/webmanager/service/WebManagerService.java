@@ -19,4 +19,6 @@ public interface WebManagerService {
      * @return
      */
     public Integer queryWebManagerCount(WebManager webManager);
+
+
 }

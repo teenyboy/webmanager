@@ -9,6 +9,11 @@ var WEBMANAGER = window.NameSpace || {};
         DEFAULT.ajaxQueryTable("/webmanager/queryWebs", null, "#websDataTables", null);
     };
 
+    WEBMANAGER.addOrUpdateView = function (id) {
+        var menuId = $("#menuId").val();
+        var menuName = $("#menuName").val();
+        window.location.href = "/webmanager/addOrUpdateView?id="+id+"&menuId="+menuId+"&menuName="+menuName;
+    };
 
     /**
      * 时间格式化

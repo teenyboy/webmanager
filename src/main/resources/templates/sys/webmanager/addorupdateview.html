@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="default">
+<head>
+    <script th:src="@{/js/webcontent.js}"></script>
+    <script>
+        $(document).ready(function () {
+            //加载ueditor
+            var ue = UE.getEditor('inputContent');
+        });
+    </script>
+</head>
+<body>
+<div layout:fragment="content" style="width: auto;height: auto;">
+
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title" th:if="${id} == 0">新增内容</h3>
+            <h3 class="box-title" th:if="${id} != 0">更新内容</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form class="form-horizontal">
+            <div class="box-body">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label for="inputTitle">标题</label>
+                        <input type="text" class="form-control" id="inputTitle" placeholder="标题"/>
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <div class="col-sm-12">
+                        <label for="inputContent">内容</label>
+                        <script id="inputContent" name="inputContent" type="text/plain"></script>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <button type="button" class="btn btn-default" onclick="WEBCONTENT.return();">取消</button>
+                <button type="button" class="btn btn-info pull-right">确认</button>
+            </div>
+            <!-- /.box-footer -->
+        </form>
+    </div>
+
+    <input id="menuId" th:value="${menuId}" hidden="hidden"/>
+    <input id="menuName" th:value="${menuName}" hidden="hidden"/>
+</div>
+</body>
+</html>

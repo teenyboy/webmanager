@@ -14,8 +14,7 @@
 <div layout:fragment="content" style="width: auto;height: auto;">
 
     <div>
-        <button type="button" class="btn btn-info" onclick="MENUMANAGER.newMenuOpen();">
-            新增信息
+        <button type="button" class="btn btn-info" onclick="WEBMANAGER.addOrUpdateView(0)">新增信息
         </button>
     </div>
     <div class="box" style="margin-top: 20px">
@@ -48,9 +47,8 @@
         </div>
     </div>
 
-    <!--<div th:include="sys/menu/newmenu :: newMenu"></div>-->
-
-    <input id="webManagerId" th:value="${webManagerId}" hidden="hidden"/>
+    <input id="menuId" th:value="${menuId}" hidden="hidden"/>
+    <input id="menuName" th:value="${menuName}" hidden="hidden"/>
 </div>
 </body>
 </html>

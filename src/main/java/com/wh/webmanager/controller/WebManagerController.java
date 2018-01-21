@@ -1,7 +1,9 @@
 package com.wh.webmanager.controller;
 
+import com.wh.webmanager.domain.WebContent;
 import com.wh.webmanager.domain.WebManager;
 import com.wh.webmanager.domain.enums.YnEnum;
+import com.wh.webmanager.service.WebContentService;
 import com.wh.webmanager.service.WebManagerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +21,13 @@ public class WebManagerController extends BaseController {
 
     @Resource
     private WebManagerService webManagerService;
+    @Resource
+    private WebContentService webContentService;
 
     @RequestMapping(value = "/")
     public String index(Integer id,String name,Model view){
-        view.addAttribute("webName",name);
-        view.addAttribute("webManagerId",id);
+        view.addAttribute("menuName",name);
+        view.addAttribute("menuId",id);
         return "/sys/webmanager/webmanager";
     }
 
@@ -36,4 +40,19 @@ public class WebManagerController extends BaseController {
         return toDataTable(webManagers, webManager);
     }
 
+    @RequestMapping(value = "/addOrUpdateView")
+    public String addOrUpdateView(Integer id,Integer menuId,String menuName,Model view){
+        if(id != null){
+            if(id!=0){
+                WebContent webContent = webContentService.queryWebContentByWeMId(id);
+                view.addAttribute("webContent",webContent);
+            }
+        }else {
+            return "error";
+        }
+        view.addAttribute("id",id);
+        view.addAttribute("menuId",menuId);
+        view.addAttribute("menuName",menuName);
+        return "/sys/webmanager/addorupdateview";
+    }
 }
