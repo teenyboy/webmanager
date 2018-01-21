@@ -15,7 +15,12 @@ public class WebManagerServiceImpl implements WebManagerService{
     private WebManagerMapper webManagerMapper;
 
     @Override
-    public List<WebManager> webManagers(WebManager webManager) {
-        return null;
+    public List<WebManager> queryWebManagers(WebManager webManager) {
+        return webManagerMapper.queryWebManagers(webManager);
+    }
+
+    @Override
+    public Integer queryWebManagerCount(WebManager webManager) {
+        return webManagerMapper.queryWebManagerCount(webManager);
     }
 }

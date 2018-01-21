@@ -3,6 +3,8 @@ package com.wh.webmanager.dao;
 import com.wh.webmanager.domain.WebManager;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface WebManagerMapper {
     int deleteByPrimaryKey(Long id);
@@ -16,4 +18,8 @@ public interface WebManagerMapper {
     int updateByPrimaryKeySelective(WebManager record);
 
     int updateByPrimaryKey(WebManager record);
+
+    List<WebManager> queryWebManagers(WebManager webManager);
+
+    Integer queryWebManagerCount(WebManager webManager);
 }

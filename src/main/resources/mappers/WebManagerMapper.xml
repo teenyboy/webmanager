@@ -7,14 +7,14 @@
     <result column="grade" property="grade" jdbcType="INTEGER" />
     <result column="menuid" property="menuid" jdbcType="BIGINT" />
     <result column="title" property="title" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="DATE" />
-    <result column="create_person" property="createPerson" jdbcType="VARCHAR" />
-    <result column="update_time" property="updateTime" jdbcType="DATE" />
-    <result column="update_person" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="createperson" property="createperson" jdbcType="VARCHAR" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="updateperson" property="updateperson" jdbcType="VARCHAR" />
     <result column="yn" property="yn" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, imgpath, grade, menuid, title, create_time, create_person, update_time, update_person, 
+    id, imgpath, grade, menuid, title, createtime, createperson, updatetime, updateperson, 
     yn
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -29,12 +29,12 @@
   </delete>
   <insert id="insert" parameterType="com.wh.webmanager.domain.WebManager" >
     insert into webmanager (id, imgpath, grade, 
-      menuid, title, create_time, 
-      create_person, update_time, update_person, 
+      menuid, title, createtime, 
+      createperson, updatetime, updateperson, 
       yn)
     values (#{id,jdbcType=BIGINT}, #{imgpath,jdbcType=VARCHAR}, #{grade,jdbcType=INTEGER}, 
-      #{menuid,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
-      #{createPerson,jdbcType=VARCHAR}, #{updateTime,jdbcType=DATE}, #{updatePerson,jdbcType=VARCHAR}, 
+      #{menuid,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{createperson,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, #{updateperson,jdbcType=VARCHAR}, 
       #{yn,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.wh.webmanager.domain.WebManager" >
@@ -55,17 +55,17 @@
       <if test="title != null" >
         title,
       </if>
-      <if test="createTime != null" >
-        create_time,
+      <if test="createtime != null" >
+        createtime,
       </if>
-      <if test="createPerson != null" >
-        create_person,
+      <if test="createperson != null" >
+        createperson,
       </if>
-      <if test="updateTime != null" >
-        update_time,
+      <if test="updatetime != null" >
+        updatetime,
       </if>
-      <if test="updatePerson != null" >
-        update_person,
+      <if test="updateperson != null" >
+        updateperson,
       </if>
       <if test="yn != null" >
         yn,
@@ -87,17 +87,17 @@
       <if test="title != null" >
         #{title,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=DATE},
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="createPerson != null" >
-        #{createPerson,jdbcType=VARCHAR},
+      <if test="createperson != null" >
+        #{createperson,jdbcType=VARCHAR},
       </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=DATE},
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updatePerson != null" >
-        #{updatePerson,jdbcType=VARCHAR},
+      <if test="updateperson != null" >
+        #{updateperson,jdbcType=VARCHAR},
       </if>
       <if test="yn != null" >
         #{yn,jdbcType=TINYINT},
@@ -119,17 +119,17 @@
       <if test="title != null" >
         title = #{title,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=DATE},
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="createPerson != null" >
-        create_person = #{createPerson,jdbcType=VARCHAR},
+      <if test="createperson != null" >
+        createperson = #{createperson,jdbcType=VARCHAR},
       </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=DATE},
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updatePerson != null" >
-        update_person = #{updatePerson,jdbcType=VARCHAR},
+      <if test="updateperson != null" >
+        updateperson = #{updateperson,jdbcType=VARCHAR},
       </if>
       <if test="yn != null" >
         yn = #{yn,jdbcType=TINYINT},
@@ -143,10 +143,10 @@
       grade = #{grade,jdbcType=INTEGER},
       menuid = #{menuid,jdbcType=BIGINT},
       title = #{title,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=DATE},
-      create_person = #{createPerson,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=DATE},
-      update_person = #{updatePerson,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      createperson = #{createperson,jdbcType=VARCHAR},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      updateperson = #{updateperson,jdbcType=VARCHAR},
       yn = #{yn,jdbcType=TINYINT}
     where id = #{id,jdbcType=BIGINT}
   </update>

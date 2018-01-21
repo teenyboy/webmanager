@@ -64,6 +64,15 @@ var MENUMANAGER = window.NameSpace || {};
     };
 
     /**
+     * 时间格式化
+     * @param data
+     * @returns {*}
+     */
+    MENUMANAGER.timeFormat = function (data) {
+        return DEFAULT.formatTime(data,"YYYY-MM-DD HH:mm:ss");
+    };
+
+    /**
      * 删除栏目
      * @param id
      */

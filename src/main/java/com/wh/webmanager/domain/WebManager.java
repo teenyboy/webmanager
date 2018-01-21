@@ -13,13 +13,13 @@ public class WebManager extends QueryParams{
 
     private String title;
 
-    private Date createTime;
+    private Date createtime;
 
-    private String createPerson;
+    private String createperson;
 
-    private Date updateTime;
+    private Date updatetime;
 
-    private String updatePerson;
+    private String updateperson;
 
     private Byte yn;
 
@@ -63,36 +63,36 @@ public class WebManager extends QueryParams{
         this.title = title == null ? null : title.trim();
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreatetime() {
+        return createtime;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
     }
 
-    public String getCreatePerson() {
-        return createPerson;
+    public String getCreateperson() {
+        return createperson;
     }
 
-    public void setCreatePerson(String createPerson) {
-        this.createPerson = createPerson == null ? null : createPerson.trim();
+    public void setCreateperson(String createperson) {
+        this.createperson = createperson == null ? null : createperson.trim();
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public Date getUpdatetime() {
+        return updatetime;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setUpdatetime(Date updatetime) {
+        this.updatetime = updatetime;
     }
 
-    public String getUpdatePerson() {
-        return updatePerson;
+    public String getUpdateperson() {
+        return updateperson;
     }
 
-    public void setUpdatePerson(String updatePerson) {
-        this.updatePerson = updatePerson == null ? null : updatePerson.trim();
+    public void setUpdateperson(String updateperson) {
+        this.updateperson = updateperson == null ? null : updateperson.trim();
     }
 
     public Byte getYn() {

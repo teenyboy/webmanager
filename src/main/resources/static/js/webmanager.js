@@ -8,4 +8,14 @@ var WEBMANAGER = window.NameSpace || {};
     WEBMANAGER.queryWebs = function () {
         DEFAULT.ajaxQueryTable("/webmanager/queryWebs", null, "#websDataTables", null);
     };
+
+
+    /**
+     * 时间格式化
+     * @param data
+     * @returns {*}
+     */
+    WEBMANAGER.timeFormat = function (data) {
+        return DEFAULT.formatTime(data,"YYYY-MM-DD HH:mm:ss");
+    };
 })();

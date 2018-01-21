@@ -313,5 +313,19 @@ var DEFAULT = window.NameSpace || {};
         );
     };
 
+    /**
+     * 时间格式化
+     * @param time
+     * @param formatStyle
+     * @returns {*}
+     */
+    DEFAULT.formatTime = function (time,formatStyle) {
+        if(!DEFAULT.isEmptyStr(time)&&!DEFAULT.isEmptyStr(formatStyle)){
+            return moment(time).format(formatStyle);
+        }else{
+            return time;
+        }
+    };
+    
     /***********公共组件**********************************************************************************************************/
 })();

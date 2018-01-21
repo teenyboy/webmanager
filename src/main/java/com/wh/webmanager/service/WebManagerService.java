@@ -6,5 +6,17 @@ import java.util.List;
 
 public interface WebManagerService {
 
-    public List<WebManager> webManagers(WebManager webManager);
+    /**
+     * 查询网站内容明细
+     * @param webManager
+     * @return
+     */
+    public List<WebManager> queryWebManagers(WebManager webManager);
+
+    /**
+     * 查询网站内容数量
+     * @param webManager
+     * @return
+     */
+    public Integer queryWebManagerCount(WebManager webManager);
 }
