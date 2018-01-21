@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -18,29 +19,12 @@ public class ManagerMenuServiceImpl implements ManagerMenuService {
 
     @Override
     public void insertManagerMenus(ManagerMenu managerMenu) {
-
-        Integer num = managerMenuMapper.queryManagerMenuMaxGrade();
-        managerMenu.setYn(YnEnum.Y.getValue());
-        Integer grade = managerMenu.getGrade();
-        if (StringUtils.isEmpty(grade) ) {
-            managerMenu.setGrade(num + 1);
-            managerMenuMapper.insert(managerMenu);
-        } else {
-            managerMenuMapper.insert(managerMenu);
-            List<ManagerMenu> managerMenus = managerMenuMapper.queryMoreGradeManagerMenus(grade);
-            for(int i = 0;i<managerMenus.size();i++){
-                if(managerMenu.getGrade().equals(grade+i)){
-                    managerMenu.setGrade(managerMenu.getGrade()+1);
-                    managerMenuMapper.updateByPrimaryKey(managerMenu);
-                }else {
-                    break;
-                }
-            }
-        }
+        managerMenuMapper.insert(managerMenu);
     }
 
+
     @Override
-    public List<ManagerMenu> queryManagerMenuDataTables(ManagerMenu managerMenu) {
+    public List<ManagerMenu> queryManagerMenus(ManagerMenu managerMenu) {
         return managerMenuMapper.queryManagerMenus(managerMenu);
     }
 
@@ -52,6 +36,22 @@ public class ManagerMenuServiceImpl implements ManagerMenuService {
     @Override
     public Integer deleteByPrimaryKey(Long id) {
         return managerMenuMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void dealGradeManagerMenu(ManagerMenu managerMenu) {
+        Integer grade = managerMenu.getGrade();
+        List<ManagerMenu> managerMenus = managerMenuMapper.queryMoreGradeManagerMenus(grade);
+        for (int i = 0; i < managerMenus.size(); i++) {
+            if (managerMenus.get(i).getGrade().equals(grade + i)) {
+                managerMenus.get(i).setGrade(managerMenus.get(i).getGrade() + 1);
+                managerMenus.get(i).setUpdatetime(new Date());
+                managerMenus.get(i).setYn(YnEnum.Y.getValue());
+                managerMenuMapper.updateByPrimaryKey(managerMenus.get(i));
+            } else {
+                break;
+            }
+        }
     }
 
     @Override

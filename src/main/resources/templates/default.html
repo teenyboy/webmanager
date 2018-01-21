@@ -37,6 +37,12 @@
     </script>
     <!-- wh -->
 
+    <script>
+        $(document).ready(function () {
+            DEFAULT.dealFrame();
+        });
+    </script>
+
 </head>
 <body id="defaultBody" class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -55,14 +61,14 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img th:src="@{/plugins/AdminLTE/img/user2-160x160.jpg}" class="user-image"
                                  alt="User Image"/>
-                            <span class="hidden-xs" th:text="${name}"></span>
+                            <span class="hidden-xs" id="userNameSmall"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
                                 <img th:src="@{/plugins/AdminLTE/img/user2-160x160.jpg}" class="img-circle"
                                      alt="User Image"/>
-                                <p th:text="${name}">
+                                <p id="userNameDropDown">
                                 </p>
                             </li>
                             <!-- Menu Footer-->
@@ -90,8 +96,7 @@
                         <i class="fa fa-dashboard"></i> <span>网站管理</span>
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
-                    <ul class="treeview-menu" th:each="managerMenu : ${managerMenus}">
-                        <li><a href="javascript:void(0);"><i class="fa fa-circle-o" th:onclick="'javascript:DEFAULT.toMenuContent('+${managerMenu.id}+');'" th:text="${managerMenu.name}"></i></a></li>
+                    <ul class="treeview-menu" id="managerMenus">
                     </ul>
                 </li>
                 <li class="treeview">
@@ -100,7 +105,7 @@
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> 栏目管理</a></li>
+                        <li class="active"><a href="/menu/"><i class="fa fa-circle-o"></i> 栏目管理</a></li>
                         <li><a href="index2.html"><i class="fa fa-circle-o"></i> 用户管理</a></li>
                     </ul>
                 </li>

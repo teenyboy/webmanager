@@ -5,15 +5,16 @@ var MENUMANAGER = window.NameSpace || {};
     MENUMANAGER.newMenuOpen = function () {
         $("#menuName").val("");
         $("#menuGrade").val("");
-        $("#menusTitle").val("新增模块");
+        $("#menusTitle").text("新增模块");
         $("#operationStyle").val("add");
         $("#newMenuModal").modal('show');
     };
 
-    MENUMANAGER.newMenu = function () {
+    MENUMANAGER.addOrUpdateMenu = function () {
 
         var menuName = $("#menuName").val().trim();
         var menuGrade = $("#menuGrade").val().trim();
+        var updateId = $("#updateId").val().trim();
 
         if (DEFAULT.isEmptyStr(menuName)) {
             alert("输入非法，模块名称不能为空");
@@ -27,7 +28,7 @@ var MENUMANAGER = window.NameSpace || {};
 
         var opertionStyle = $("#operationStyle").val();
 
-        var data = {name: menuName, grade: menuGrade,opertionStyle:opertionStyle};
+        var data = {name: menuName, grade: menuGrade,opertionStyle:opertionStyle,id:updateId};
         DEFAULT.Ajax("/menu/addOrUpdateMenu", data, true, function (res) {
             if (res.result == true) {
                 alert(res.msg);
@@ -36,6 +37,7 @@ var MENUMANAGER = window.NameSpace || {};
                 alert(res.msg);
             }
             MENUMANAGER.clear();
+            window.location.reload();
         })
     };
 
@@ -45,13 +47,13 @@ var MENUMANAGER = window.NameSpace || {};
     MENUMANAGER.clear = function () {
         $("#menuName").val("");
         $("#menuGrade").val("");
-        $("#menusTitle").val("");
+        $("#menusTitle").text("");
         $("#operationStyle").val("");
         $("#newMenuModal").modal('hide');
     };
 
     MENUMANAGER.queryMenus = function () {
-        DEFAULT.ajaxQueryNew("/menu/queryMenus", null, "#menusDataTables", null);
+        DEFAULT.ajaxQueryTable("/menu/queryMenus", null, "#menusDataTables", null);
     };
 
     MENUMANAGER.operation = function (data) {
@@ -80,12 +82,18 @@ var MENUMANAGER = window.NameSpace || {};
     MENUMANAGER.updateMenusWindow = function (id) {
 
         var data = {id:id};
+        $("#updateId").val(id);
         DEFAULT.Ajax("/menu/queryMenuById", data, true, function (res) {
             if (res.result == true) {
+                if(DEFAULT.isEmptyStr(res.msg)){
+                    alert("操作异常，请刷新页面");
+                    return;
+                }
+                var resObj = eval('('+res.msg+')');
                 $("#updateId").val(id);
-                $("#menuName").val(res.name);
-                $("#menuGrade").val(res.grade);
-                $("#menusTitle").val("更新模块");
+                $("#menuName").val(resObj.name);
+                $("#menuGrade").val(resObj.grade);
+                $("#menusTitle").text("更新模块");
                 $("#operationStyle").val("update");
                 $("#newMenuModal").modal('show');
             } else {

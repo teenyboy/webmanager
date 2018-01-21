@@ -17,6 +17,7 @@
         FROM
           managermenu
         <include refid="Base_Query" />
+        order by grade asc
         limit ${startIndex}, ${pageSize}
     </select>
 

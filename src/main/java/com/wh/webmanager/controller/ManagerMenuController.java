@@ -2,7 +2,6 @@ package com.wh.webmanager.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.wh.webmanager.domain.ManagerMenu;
-import com.wh.webmanager.domain.QueryParams;
 import com.wh.webmanager.domain.ServiceResult;
 import com.wh.webmanager.domain.enums.YnEnum;
 import com.wh.webmanager.service.ManagerMenuService;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +35,7 @@ public class ManagerMenuController extends BaseController {
     @RequestMapping(value = "/queryMenus")
     public Map<String, Object> queryMenus(ManagerMenu managerMenu) {
         managerMenu.setYn(YnEnum.Y.getValue());
-        List<ManagerMenu> managerMenus = managerMenuService.queryManagerMenuDataTables(managerMenu);
+        List<ManagerMenu> managerMenus = managerMenuService.queryManagerMenus(managerMenu);
         managerMenu.setRecordsTotal(managerMenuService.queryManagerMenuCount(managerMenu));
         return toDataTable(managerMenus, managerMenu);
     }
@@ -72,15 +72,18 @@ public class ManagerMenuController extends BaseController {
     public String addOrUpdateMenu(ManagerMenu managerMenu, String opertionStyle) {
         ServiceResult serviceResult;
         try {
-
             if (!opertionStyle.equals("add") && !opertionStyle.equals("update")) {
                 serviceResult = new ServiceResult(false, "操作失败");
                 return toResult(serviceResult);
             }
+            managerMenuService.dealGradeManagerMenu(managerMenu);
+            managerMenu.setYn(YnEnum.Y.getValue());
             if (opertionStyle.equals("add")) {
+                managerMenu.setCreatetime(new Date());
                 managerMenuService.insertManagerMenus(managerMenu);
                 serviceResult = new ServiceResult(true, "新增成功");
             } else {
+                managerMenu.setUpdatetime(new Date());
                 managerMenuService.updateByPrimaryKeySelective(managerMenu);
                 serviceResult = new ServiceResult(true, "更新成功");
             }

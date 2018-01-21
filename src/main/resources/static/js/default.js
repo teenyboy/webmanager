@@ -6,10 +6,45 @@ var DEFAULT = window.NameSpace || {};
     DEFAULT.RESPONSE_MESSAGE_KEY="REQ_MSG";
     DEFAULT.RESPONSE_DATA_KEY="REQ_DATA";
 
+    /***********外框逻辑**********************************************************************************************************/
+
+    DEFAULT.dealFrame =function () {
+        DEFAULT.queryMenus();//组装外框下拉栏目
+        DEFAULT.user();//填充姓名
+    };
+
+    DEFAULT.queryMenus =function () {
+        DEFAULT.Ajax("/queryManagerMenus", null, true, function (res) {
+            if (res.result == true) {
+                if(DEFAULT.isEmptyStr(res.msg)){
+                    alert("操作异常，请刷新页面");
+                    return;
+                }
+                var resObj = eval('('+res.msg+')');
+                for(var i = 0;i<resObj.length;i++){
+                    $("#managerMenus").append('<li><a href="/webmanager/?id='+resObj[i].id+'&name='+resObj[i].name+'"><i class="fa fa-circle-o"></i>'+resObj[i].name+'</a></li>');
+                }
+            } else {
+                alert(res.msg);
+            }
+        });
+    };
+
+    DEFAULT.user =function () {
+        $("#userNameSmall").text("wang");
+        $("#userNameDropDown").text("wang");
+    };
+
     DEFAULT.toMenuContent = function (menuId) {
         console.log(menuId)
     };
 
+
+    /***********外框逻辑**********************************************************************************************************/
+
+
+
+    /***********公共组件**********************************************************************************************************/
     DEFAULT.isEmptyStr = function (str) {
         if(str == undefined || str == null || str == "" ||str.length === 0){
             return true;
@@ -80,7 +115,7 @@ var DEFAULT = window.NameSpace || {};
      * @param tableSelector string; 必填; 查询结果的展示位置
      * @param error function; 非必填; 查询异常回调方法，默认回调方法提示“系统繁忙”
      */
-    DEFAULT.ajaxQueryNew = function(url, data, tableSelector, error, option, eventHandlers) {
+    DEFAULT.ajaxQueryTable = function(url, data, tableSelector, error, option, eventHandlers) {
         if(typeof (DEFAULT.tableMap) == 'undefined'){
             DEFAULT.tableMap = new Object();
         }
@@ -276,5 +311,7 @@ var DEFAULT = window.NameSpace || {};
                 }
             }
         );
-    }
+    };
+
+    /***********公共组件**********************************************************************************************************/
 })();

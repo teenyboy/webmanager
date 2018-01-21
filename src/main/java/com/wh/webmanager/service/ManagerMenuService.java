@@ -31,7 +31,7 @@ public interface ManagerMenuService {
      * @param managerMenu
      * @return
      */
-    public List<ManagerMenu> queryManagerMenuDataTables(ManagerMenu managerMenu);
+    public List<ManagerMenu> queryManagerMenus(ManagerMenu managerMenu);
 
     /**
      * 查询模块总量
@@ -48,4 +48,9 @@ public interface ManagerMenuService {
     public Integer deleteByPrimaryKey(Long id);
 
 
+    /**
+     * 插入更新时处理菜单栏顺序
+     * @param managerMenu
+     */
+    public void dealGradeManagerMenu(ManagerMenu managerMenu);
 }

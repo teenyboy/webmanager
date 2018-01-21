@@ -29,7 +29,7 @@ public interface ManagerMenuMapper {
 
     List<ManagerMenu> queryManagerMenus(ManagerMenu managerMenu);
 
-    @Select("select * from managermenu where grade >= #{grade} and yn = 1")
+    @Select("select * from managermenu where grade >= #{grade} and yn = 1 order by grade asc")
     List<ManagerMenu> queryMoreGradeManagerMenus(Integer grade);
 
     void updateMoreGradeList(List<ManagerMenu> managerMenus);
