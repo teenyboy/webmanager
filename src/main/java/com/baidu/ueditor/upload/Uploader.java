@@ -1,6 +1,6 @@
-package com.wh.webmanager.plugins.ueditor.upload;
+package com.baidu.ueditor.upload;
 
-import com.wh.webmanager.plugins.ueditor.define.State;
+import com.baidu.ueditor.define.State;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,14 +14,14 @@ public class Uploader {
 	}
 
 	public final State doExec() {
-		
+		String filedName = (String) this.conf.get("fieldName");
 		State state = null;
 
 		if ("true".equals(this.conf.get("isBase64"))) {
-			state = new Base64Uploader().save(this.request,
+			state = Base64Uploader.save(this.request.getParameter(filedName),
 					this.conf);
 		} else {
-			state = new BinaryUploader().save(this.request, this.conf);
+			state = BinaryUploader.save(this.request, this.conf);
 		}
 
 		return state;

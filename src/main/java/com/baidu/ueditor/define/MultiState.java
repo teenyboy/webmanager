@@ -1,4 +1,4 @@
-package com.wh.webmanager.plugins.ueditor.define;
+package com.baidu.ueditor.define;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.wh.webmanager.plugins.ueditor.Encoder;
+import com.baidu.ueditor.Encoder;
 
 /**
  * 多状态集合状态

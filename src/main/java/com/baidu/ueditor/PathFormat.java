@@ -1,4 +1,4 @@
-package com.wh.webmanager.plugins.ueditor;
+package com.baidu.ueditor;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

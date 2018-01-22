@@ -1,22 +1,27 @@
-package com.wh.webmanager.plugins.ueditor;
+package com.baidu.ueditor;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.baidu.ueditor.define.ActionMap;
+import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.wh.webmanager.plugins.ueditor.define.ActionMap;
+import java.io.*;
+import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 配置管理器
  * @author hancong03@baidu.com
  *
  */
-public class ConfigManager {
+public final class ConfigManager {
 
-	
-	
+	private final String rootPath;
+	private final String originalPath;
+	private final String contextPath;
+	private static final String configFileName = "config.json";
+	private String parentPath = null;
 	private JSONObject jsonConfig = null;
 	// 涂鸦上传filename定义
 	private final static String SCRAWL_FILE_NAME = "scrawl";
@@ -26,10 +31,39 @@ public class ConfigManager {
 	/*
 	 * 通过一个给定的路径构建一个配置管理器， 该管理器要求地址路径所在目录下必须存在config.properties文件
 	 */
-	public ConfigManager (String config) {
-		this.initEnv(config);
+	private ConfigManager ( String rootPath, String contextPath, String uri ) throws FileNotFoundException, IOException {
+		
+		rootPath = rootPath.replace( "\\", "/" );
+		
+		this.rootPath = rootPath;
+		this.contextPath = contextPath;
+		
+		if ( contextPath.length() > 0 ) {
+			this.originalPath = this.rootPath + uri.substring( contextPath.length() );
+		} else {
+			this.originalPath = this.rootPath + uri;
+		}
+		
+		this.initEnv();
+		
 	}
 	
+	/**
+	 * 配置管理器构造工厂
+	 * @param rootPath 服务器根路径
+	 * @param contextPath 服务器所在项目路径
+	 * @param uri 当前访问的uri
+	 * @return 配置管理器实例或者null
+	 */
+	public static ConfigManager getInstance ( String rootPath, String contextPath, String uri ) {
+		
+		try {
+			return new ConfigManager(rootPath, contextPath, uri);
+		} catch ( Exception e ) {
+			return null;
+		}
+		
+	}
 	
 	// 验证配置文件加载是否正确
 	public boolean valid () {
@@ -37,14 +71,16 @@ public class ConfigManager {
 	}
 	
 	public JSONObject getAllConfig () {
+		
 		return this.jsonConfig;
+		
 	}
 	
 	public Map<String, Object> getConfig ( int type ) {
 		
 		Map<String, Object> conf = new HashMap<String, Object>();
 		String savePath = null;
-		
+
 		switch ( type ) {
 		
 			case ActionMap.UPLOAD_FILE:
@@ -100,24 +136,47 @@ public class ConfigManager {
 				break;
 				
 		}
-		
+		//将basePath塞进conf
+		conf.put("basePath",this.jsonConfig.getString( "basePath" ) );
 		conf.put( "savePath", savePath );
-//		conf.put( "rootPath", this.rootPath );
+		conf.put( "rootPath", this.rootPath );
 		
 		return conf;
 		
 	}
+	
+	private void initEnv () throws FileNotFoundException, IOException {
+		
+		File file = new File( this.originalPath );
+		
+		if ( !file.isAbsolute() ) {
+			file = new File( file.getAbsolutePath() );
+		}
+		
+		this.parentPath = file.getParent();
+		
+		//String configContent = this.readFile( this.getConfigPath() );
+		String configContent = this.filter(IOUtils.toString(this.getClass().getClassLoader().getResourceAsStream("config.json")));
 
-    private void initEnv (String config) {
 		try{
-			JSONObject jsonConfig = new JSONObject(config);
+			JSONObject jsonConfig = new JSONObject( configContent );
 			this.jsonConfig = jsonConfig;
 		} catch ( Exception e ) {
 			this.jsonConfig = null;
 		}
 		
 	}
-	
+
+
+	private String getConfigPath () {
+		//return this.parentPath + File.separator + ConfigManager.configFileName;
+		try {
+			//获取classpath下的config.json路径
+			return this.getClass().getClassLoader().getResource("config.json").toURI().getPath();
+		} catch (URISyntaxException e) {
+			return null;
+		}
+	}
 
 	private String[] getArray ( String key ) {
 		
@@ -132,5 +191,36 @@ public class ConfigManager {
 		
 	}
 	
+	private String readFile ( String path ) throws IOException {
+		
+		StringBuilder builder = new StringBuilder();
+		
+		try {
+			
+			InputStreamReader reader = new InputStreamReader( new FileInputStream( path ), "UTF-8" );
+			BufferedReader bfReader = new BufferedReader( reader );
+			
+			String tmpContent = null;
+			
+			while ( ( tmpContent = bfReader.readLine() ) != null ) {
+				builder.append( tmpContent );
+			}
+			
+			bfReader.close();
+			
+		} catch ( UnsupportedEncodingException e ) {
+			// 忽略
+		}
+		
+		return this.filter( builder.toString() );
+		
+	}
+	
+	// 过滤输入字符串, 剔除多行注释以及替换掉反斜杠
+	private String filter ( String input ) {
+		
+		return input.replaceAll( "/\\*[\\s\\S]*?\\*/", "" );
+		
+	}
 	
 }

@@ -1,20 +1,20 @@
-package com.wh.webmanager.plugins.ueditor.hunter;
+package com.baidu.ueditor.hunter;
 
 import java.net.HttpURLConnection;
+import java.net.InetAddress;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.wh.webmanager.plugins.ueditor.PathFormat;
-import com.wh.webmanager.plugins.ueditor.define.AppInfo;
-import com.wh.webmanager.plugins.ueditor.define.BaseState;
-import com.wh.webmanager.plugins.ueditor.define.MIMEType;
-import com.wh.webmanager.plugins.ueditor.define.MultiState;
-import com.wh.webmanager.plugins.ueditor.define.State;
-import com.wh.webmanager.plugins.ueditor.upload.StorageManager;
+import com.baidu.ueditor.PathFormat;
+import com.baidu.ueditor.define.AppInfo;
+import com.baidu.ueditor.define.BaseState;
+import com.baidu.ueditor.define.MIMEType;
+import com.baidu.ueditor.define.MultiState;
+import com.baidu.ueditor.define.State;
+import com.baidu.ueditor.upload.StorageManager;
 
 /**
  * 图片抓取器
@@ -23,9 +23,6 @@ import com.wh.webmanager.plugins.ueditor.upload.StorageManager;
  */
 public class ImageHunter {
 
-	@Autowired
-	private StorageManager storageManager;
-	
 	private String filename = null;
 	private String savePath = null;
 	private String rootPath = null;
@@ -89,10 +86,13 @@ public class ImageHunter {
 				return new BaseState( false, AppInfo.MAX_SIZE );
 			}
 			
+			String savePath = this.getPath( this.savePath, this.filename, suffix );
+			String physicalPath = this.rootPath + savePath;
 
-			State state = storageManager.saveFileByInputStream( connection.getInputStream(), urlStr );
+			State state = StorageManager.saveFileByInputStream( connection.getInputStream(), physicalPath );
 			
 			if ( state.isSuccess() ) {
+				state.putInfo( "url", PathFormat.format( savePath ) );
 				state.putInfo( "source", urlStr );
 			}
 			
@@ -111,6 +111,15 @@ public class ImageHunter {
 	}
 	
 	private boolean validHost ( String hostname ) {
+		try {
+			InetAddress ip = InetAddress.getByName(hostname);
+			
+			if (ip.isSiteLocalAddress()) {
+				return false;
+			}
+		} catch (UnknownHostException e) {
+			return false;
+		}
 		
 		return !filters.contains( hostname );
 		

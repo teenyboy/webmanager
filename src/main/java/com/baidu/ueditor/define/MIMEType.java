@@ -1,4 +1,4 @@
-package com.wh.webmanager.plugins.ueditor.define;
+package com.baidu.ueditor.define;
 
 import java.util.HashMap;
 import java.util.Map;

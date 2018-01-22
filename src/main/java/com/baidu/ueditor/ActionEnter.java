@@ -1,33 +1,40 @@
-package com.wh.webmanager.plugins.ueditor;
+package com.baidu.ueditor;
 
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.wh.webmanager.plugins.ueditor.define.ActionMap;
-import com.wh.webmanager.plugins.ueditor.define.AppInfo;
-import com.wh.webmanager.plugins.ueditor.define.BaseState;
-import com.wh.webmanager.plugins.ueditor.define.State;
-import com.wh.webmanager.plugins.ueditor.hunter.FileManager;
-import com.wh.webmanager.plugins.ueditor.hunter.ImageHunter;
-import com.wh.webmanager.plugins.ueditor.upload.Uploader;
+import com.baidu.ueditor.define.ActionMap;
+import com.baidu.ueditor.define.AppInfo;
+import com.baidu.ueditor.define.BaseState;
+import com.baidu.ueditor.define.State;
+import com.baidu.ueditor.hunter.FileManager;
+import com.baidu.ueditor.hunter.ImageHunter;
+import com.baidu.ueditor.upload.Uploader;
 
 public class ActionEnter {
 	
-	private ConfigManager configManager = null;
-	
 	private HttpServletRequest request = null;
+	
+	private String rootPath = null;
+	private String contextPath = null;
 	
 	private String actionType = null;
 	
-	public ActionEnter(ConfigManager configManager){
-		this.configManager = configManager;
-	}
-	
-	public String exec (HttpServletRequest request) {
+	private ConfigManager configManager = null;
+
+	public ActionEnter ( HttpServletRequest request, String rootPath ) {
 		
 		this.request = request;
+		this.rootPath = rootPath;
 		this.actionType = request.getParameter( "action" );
+		this.contextPath = request.getContextPath();
+		this.configManager = ConfigManager.getInstance( this.rootPath, this.contextPath, request.getRequestURI() );
+		
+	}
+	
+	public String exec () {
+		
 		String callbackName = this.request.getParameter("callback");
 		
 		if ( callbackName != null ) {
@@ -83,8 +90,7 @@ public class ActionEnter {
 			case ActionMap.LIST_FILE:
 				conf = configManager.getConfig( actionCode );
 				int start = this.getStartIndex();
-				String marker = this.getMarker();
-				state = new FileManager( conf ).listFile( start,marker );
+				state = new FileManager( conf ).listFile( start );
 				break;
 				
 		}
@@ -96,17 +102,13 @@ public class ActionEnter {
 	public int getStartIndex () {
 		
 		String start = this.request.getParameter( "start" );
+		
 		try {
 			return Integer.parseInt( start );
 		} catch ( Exception e ) {
 			return 0;
 		}
 		
-	}
-	public String getMarker () {
-		
-		String marker = this.request.getParameter( "marker" );
-		return marker;
 	}
 	
 	/**
