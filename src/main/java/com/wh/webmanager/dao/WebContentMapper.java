@@ -19,5 +19,8 @@ public interface WebContentMapper {
     int updateByPrimaryKey(WebContent record);
 
     @Select("select * from webcontent where yn = 1 and webmid = #{webMId}")
-    WebContent queryWebContentByWeMId(Integer webMId);
+    WebContent queryWebContentByWeMId(Long webMId);
+
+    @Select("select * from webcontent where yn = 1 and id = #{id}")
+    WebContent queryWebContentById(Long id);
 }

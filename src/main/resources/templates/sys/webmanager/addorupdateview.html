@@ -3,11 +3,13 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="default">
 <head>
-    <script th:src="@{/js/webcontent.js}"></script>
+    <script th:src="@{/js/web/webcontent.js}"></script>
     <script>
         $(document).ready(function () {
             //加载ueditor
             var ue = UE.getEditor('inputContent');
+            var webContent = $("#webContent").val();
+            ue.setContent(webContent);
         });
     </script>
 </head>
@@ -40,14 +42,16 @@
             <!-- /.box-body -->
             <div class="box-footer">
                 <button type="button" class="btn btn-default" onclick="WEBCONTENT.return();">取消</button>
-                <button type="button" class="btn btn-info pull-right" onclick="WEBCONTENT.getAllHtml();">确认</button>
+                <button type="button" class="btn btn-info pull-right" onclick="WEBCONTENT.addAndUpdateContent();">确认</button>
             </div>
             <!-- /.box-footer -->
         </form>
     </div>
 
-    <input id="menuId" th:value="${menuId}" hidden="hidden"/>
-    <input id="menuName" th:value="${menuName}" hidden="hidden"/>
+    <input id="webmId" th:value="${webmId}" hidden="hidden"/>
+    <input id="webmName" th:value="${webmName}" hidden="hidden"/>
+    <input id="updateId" th:value="${updateId}" hidden="hidden"/>
+    <input id="webContent" th:value="${webContent}" hidden="hidden">
 </div>
 </body>
 </html>

@@ -14,7 +14,20 @@ public class WebContentServiceImpl implements WebContentService {
     private WebContentMapper webContentMapper;
 
     @Override
-    public WebContent queryWebContentByWeMId(Integer webManagerId) {
+    public WebContent queryWebContentByWeMId(Long webManagerId) {
         return webContentMapper.queryWebContentByWeMId(webManagerId);
+    }
+
+    @Override
+    public WebContent queryWebContentByid(Long id) {
+        return webContentMapper.queryWebContentById(id);
+    }
+
+    public int insertWebContent(WebContent webContent){
+        return webContentMapper.insert(webContent);
+    }
+
+    public int updateWebContent(WebContent webContent){
+        return webContentMapper.updateByPrimaryKeySelective(webContent);
     }
 }

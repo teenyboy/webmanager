@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="default">
 <head>
-    <script th:src="@{/js/webmanager.js}"></script>
+    <script th:src="@{/js/web/webmanager.js}"></script>
     <script>
         $(document).ready(function () {
             WEBMANAGER.queryWebs();
@@ -19,7 +19,7 @@
     </div>
     <div class="box" style="margin-top: 20px">
         <div class="box-header">
-            <h3 class="box-title" th:text="${menuName}"></h3>
+            <h3 class="box-title" th:text="${webmName}"></h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -35,7 +35,7 @@
                                 <th width="35%" data-field="title">标题</th>
                                 <th width="20%" data-field="createtime" data-formatter="WEBMANAGER.timeFormat">创建时间</th>
                                 <th width="20%" data-field="updatetime" data-formatter="WEBMANAGER.timeFormat">更新时间</th>
-                                <th width="15%" data-field="id">操作</th>
+                                <th width="15%" data-field="id" data-formatter="WEBMANAGER.operation">操作</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -47,8 +47,8 @@
         </div>
     </div>
 
-    <input id="menuId" th:value="${menuId}" hidden="hidden"/>
-    <input id="menuName" th:value="${menuName}" hidden="hidden"/>
+    <input id="menuId" th:value="${webmId}" hidden="hidden"/>
+    <input id="menuName" th:value="${webmName}" hidden="hidden"/>
 </div>
 </body>
 </html>

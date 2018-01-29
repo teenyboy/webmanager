@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="mdefault">
+<head>
+    <script th:src="@{/js/mobile/Mmenumanager.js}"></script>
+    <!-- Initialize Swiper -->
+    <script type="text/javascript">
+        var swiper = new Swiper('.swiper-container', {
+            // Enable lazy loading
+            auto: true,
+            autoplay: {
+                delay: 3000,
+                stopOnLastSlide: false,
+                disableOnInteraction: true
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev'
+            }
+        });
+
+        $(document).on("pagecreate", "#indexPage", function () {
+            M_MENUMANAGER.querymenus();
+        });
+
+    </script>
+</head>
+<body>
+<div layout:fragment="mcontent" style="width: auto;height: auto;">
+    <div data-role="header">
+        <h1 style="margin: 0%">自贡市自流井区就业服务管理局</h1>
+    </div>
+
+    <div class="swiper-container">
+        <w></w>
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <!-- Required swiper-lazy class and image source specified in data-src attribute -->
+                <img th:src="@{/images/other/timg.jpg}"/>
+            </div>
+            <div class="swiper-slide">
+                <img th:src="@{/images/other/timg.jpg}"/>
+            </div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination swiper-pagination-white"></div>
+        <!-- Navigation -->
+        <div class="swiper-button-next swiper-button-white"></div>
+        <div class="swiper-button-prev swiper-button-white"></div>
+    </div>
+    <div id="menu" style="margin-top: 20px">
+    </div>
+
+</div>
+</body>
+</html>

@@ -45,8 +45,14 @@ public class ManagerMenuController extends BaseController {
     public String delMenus(Long id) {
         ServiceResult serviceResult;
         try {
-            managerMenuService.deleteByPrimaryKey(id);
-            serviceResult = new ServiceResult(true, "删除成功");
+            ManagerMenu managerMenu = managerMenuService.queryMenuById(id);
+            if(managerMenu == null){
+                serviceResult =  new ServiceResult(false,"已删除，请刷新");
+            }else{
+                managerMenu.setUpdatetime(new Date());
+                managerMenuService.updateByPrimaryKeySelective(managerMenu);
+                serviceResult = new ServiceResult(true, "删除成功");
+            }
         } catch (Exception e) {
             logger.error("删除模块失败", e);
             serviceResult = new ServiceResult(false, "删除失败");

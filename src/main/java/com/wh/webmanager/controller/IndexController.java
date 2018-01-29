@@ -34,16 +34,14 @@ public class IndexController {
     @ResponseBody
     @RequestMapping(value = "/queryManagerMenus")
     public ServiceResult queryManagerMenus(){
-        ServiceResult serviceResult;
         ManagerMenu managerMenu = new ManagerMenu();
         managerMenu.setYn(YnEnum.Y.getValue());
         try {
             List<ManagerMenu> managerMenus = managerMenuService.queryManagerMenus(managerMenu);
-            serviceResult = new ServiceResult(true, JSON.toJSONString(managerMenus));
+            return new ServiceResult(true, JSON.toJSONString(managerMenus));
         }catch (Exception e){
             logger.error("主页查询栏目下拉失败",e);
-            serviceResult = new ServiceResult(false,"操作失败，请刷新");
+            return new ServiceResult(false,"操作失败，请刷新");
         }
-        return serviceResult;
     }
 }
