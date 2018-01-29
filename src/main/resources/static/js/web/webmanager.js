@@ -9,10 +9,9 @@ var WEBMANAGER = window.NameSpace || {};
         DEFAULT.ajaxQueryTable("/webmanager/queryWebs", null, "#websDataTables", null);
     };
 
-    WEBMANAGER.addOrUpdateView = function (id) {
-        var webmId = $("#webmId").val();
-        var webmName = $("#webmName").val();
-        window.location.href = "/webmanager/addOrUpdateView?id="+id+"&webmId="+webmId+"&webmName="+webmName;
+    WEBMANAGER.addOrUpdateView = function (webmid) {
+        var menuId = $("#menuId").val();
+        window.location.href = "/webmanager/addOrUpdateView?webmid="+webmid+"&menuId="+menuId;
     };
 
 

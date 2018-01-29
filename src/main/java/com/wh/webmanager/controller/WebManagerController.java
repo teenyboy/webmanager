@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,8 +32,8 @@ public class WebManagerController extends BaseController {
 
     @RequestMapping(value = "/")
     public String index(Integer id,String name,Model view){
-        view.addAttribute("webmName",name);
-        view.addAttribute("webmId",id);
+        view.addAttribute("menuName",name);
+        view.addAttribute("menuId",id);
         return "/sys/webmanager/webmanager";
     }
 
@@ -48,35 +47,65 @@ public class WebManagerController extends BaseController {
     }
 
     @RequestMapping(value = "/addOrUpdateView")
-    public String addOrUpdateView(Long id,Integer webmId,String webmName,Model view){
-        if(id != null){
-            if(id!=0){
-                WebContent webContent = webContentService.queryWebContentByWeMId(id);
+    public String addOrUpdateView(Long webmid,Integer menuId,Model view){
+        if(webmid != null){
+            if(webmid!=0){
+                WebContent webContent = webContentService.queryWebContentByWebMId(webmid);
                 view.addAttribute("webContent",webContent);
             }
         }else {
             return "error";
         }
-        view.addAttribute("updateId",id);
-        view.addAttribute("webmId",webmId);
-        view.addAttribute("webmName",webmName);
+        view.addAttribute("webmid",webmid);
+        view.addAttribute("menuId",menuId);
         return "/sys/webmanager/addorupdateview";
     }
 
     @ResponseBody
     @RequestMapping(value = "/addOrUpdateContent")
-    public String addOrUpdateContent(WebContent webContent){
+    public String addOrUpdateContent(WebContent webContent,WebManager webManager){
         ServiceResult serviceResult = null;
         try {
             webContent.setYn(YnEnum.Y.getValue());
-            if(!StringUtils.isEmpty(webContent.getId())){
-                webContent.setUpdatetime(new Date());
-                webContentService.updateWebContent(webContent);
-                serviceResult = new ServiceResult(true,"更新成功");
+            webManager.setYn(YnEnum.Y.getValue());
+
+            if(webContent.getWebmid() == 0){
+                Integer maxGrade = webManagerService.queryMaxGradeWebManager();
+                if(maxGrade == null){
+                    maxGrade = 0;
+                }
+                webManager.setGrade(maxGrade+1);
+                webManager.setCreatetime(new Date());
+                int result = webManagerService.insertWebManager(webManager);
+                if(result == 1){
+                    WebManager queryWebManager = new WebManager();
+                    queryWebManager.setYn(YnEnum.Y.getValue());
+                    queryWebManager.setGrade(webManager.getGrade());
+                    WebManager newWebManager = webManagerService.queryNewWebManager(queryWebManager);
+                    webContent.setWebmid(newWebManager.getId());
+                    webContent.setCreatetime(new Date());
+                    int webContentResult = webContentService.insertWebContent(webContent);
+                    if(webContentResult == 1){
+                        serviceResult = new ServiceResult(true,"新增web文本成功");
+                    }else{
+                        serviceResult = new ServiceResult(false,"新增web文本失败");
+                    }
+                }else {
+                    serviceResult = new ServiceResult(false,"新增web信息失败");
+                }
             }else{
-                webContent.setCreatetime(new Date());
-                webContentService.insertWebContent(webContent);
-                serviceResult = new ServiceResult(false,"新增成功");
+
+                int result = webManagerService.updateWebManager(webManager);
+                if(result == 1){
+                    int webContentResult = webContentService.updateWebContent(webContent);
+                    if(webContentResult == 1){
+                        serviceResult = new ServiceResult(true,"更新web文本成功");
+                    }else {
+                        serviceResult = new ServiceResult(false,"更新web文本失败");
+                    }
+                }else {
+                    serviceResult = new ServiceResult(false,"更新web信息失败");
+                }
             }
         }catch (Exception e){
             logger.error("增加/更新内容出错",e);

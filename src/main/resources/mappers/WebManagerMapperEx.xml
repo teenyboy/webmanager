@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wh.webmanager.dao.WebManagerMapper" >
 
-  <sql id="BaseQuery">
+
+  <sql id="Base_Query">
     where 1 = 1
     <if test="id != null" >
       AND id = #{id,jdbcType=BIGINT},
@@ -11,10 +12,10 @@
       AND imgpath = #{imgpath,jdbcType=VARCHAR},
     </if>
     <if test="grade != null" >
-      AND grade = #{grade,jdbcType=INT},
+      AND grade = #{grade,jdbcType=INTEGER},
     </if>
     <if test="menuid != null" >
-      AND menuid = #{menuId,jdbcType=BIGINT},
+      AND menuid = #{menuid,jdbcType=BIGINT},
     </if>
     <if test="title != null" >
       AND title = #{title,jdbcType=VARCHAR},
@@ -40,15 +41,23 @@
       select
       <include refid="Base_Column_List" />
       from webmanager
-      <include refid="BaseQuery"/>
+      <include refid="Base_Query"/>
       order by grade asc
       limit ${startIndex}, ${pageSize}
+  </select>
+
+  <select id="queryNewWebManager" parameterType="com.wh.webmanager.domain.WebManager" resultType="com.wh.webmanager.domain.WebManager">
+    select
+    <include refid="Base_Column_List" />
+    from webmanager
+    <include refid="Base_Query"/>
+    order by id DESC limit 1
   </select>
 
   <select id="queryWebManagerCount" parameterType="com.wh.webmanager.domain.WebManager" resultType="java.lang.Integer">
     select
      count(1)
     from webmanager
-    <include refid="BaseQuery"/>
+    <include refid="Base_Query"/>
   </select>
 </mapper>

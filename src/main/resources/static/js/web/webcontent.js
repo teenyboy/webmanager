@@ -20,11 +20,12 @@ var WEBCONTENT = window.NameSpace || {};
      * 保存更新富文本内容
      */
     WEBCONTENT.addAndUpdateContent = function () {
-        var updateId = $("#updateId").val();
-        var webmId = $("#webmId").val();
+        var webmid = $("#webmid").val();
+        var menuId = $("#menuId").val();
+        var title = $("#inputTitle").val();
         var content = UE.getEditor('inputContent').getContent();
-        var params = {id:updateId,webmid:webmId,content:content};
-        DEFAULT.ajax("/webmanager/addOrUpdateContent",params,false,function (res) {
+        var params = {webmid:webmid,menuid:menuId,content:content,title:title};
+        DEFAULT.Ajax("/webmanager/addOrUpdateContent",params,false,function (res) {
             alert(res.msg);
             if (res.result == true) {
                 var webmId = $("#webmId").val();

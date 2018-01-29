@@ -23,4 +23,24 @@ public class WebManagerServiceImpl implements WebManagerService{
     public Integer queryWebManagerCount(WebManager webManager) {
         return webManagerMapper.queryWebManagerCount(webManager);
     }
+
+    @Override
+    public int insertWebManager(WebManager record) {
+        return webManagerMapper.insert(record);
+    }
+
+    @Override
+    public WebManager queryNewWebManager(WebManager webManager) {
+        return webManagerMapper.queryNewWebManager(webManager);
+    }
+
+    @Override
+    public int updateWebManager(WebManager webManager) {
+        return webManagerMapper.updateByPrimaryKeySelective(webManager);
+    }
+
+    @Override
+    public Integer queryMaxGradeWebManager() {
+        return webManagerMapper.queryMaxGradeWebManager();
+    }
 }

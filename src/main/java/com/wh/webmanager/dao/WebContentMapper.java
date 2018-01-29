@@ -3,8 +3,10 @@ package com.wh.webmanager.dao;
 import com.wh.webmanager.domain.WebContent;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
 @Mapper
+@Repository
 public interface WebContentMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -19,7 +21,7 @@ public interface WebContentMapper {
     int updateByPrimaryKey(WebContent record);
 
     @Select("select * from webcontent where yn = 1 and webmid = #{webMId}")
-    WebContent queryWebContentByWeMId(Long webMId);
+    WebContent queryWebContentByWebMId(Long webMId);
 
     @Select("select * from webcontent where yn = 1 and id = #{id}")
     WebContent queryWebContentById(Long id);

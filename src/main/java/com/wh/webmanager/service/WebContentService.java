@@ -9,7 +9,7 @@ public interface WebContentService {
      * @param webManagerId
      * @return
      */
-    public WebContent queryWebContentByWeMId(Long webManagerId);
+    public WebContent queryWebContentByWebMId(Long webManagerId);
 
     /**
      * 根据内容id查询web内容

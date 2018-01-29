@@ -18,8 +18,8 @@
 
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title" th:if="${id} == 0">新增内容</h3>
-            <h3 class="box-title" th:if="${id} != 0">更新内容</h3>
+            <h3 class="box-title" th:if="${webmid} == 0">新增内容</h3>
+            <h3 class="box-title" th:if="${webmid} != 0">更新内容</h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
@@ -48,10 +48,9 @@
         </form>
     </div>
 
-    <input id="webmId" th:value="${webmId}" hidden="hidden"/>
-    <input id="webmName" th:value="${webmName}" hidden="hidden"/>
-    <input id="updateId" th:value="${updateId}" hidden="hidden"/>
-    <input id="webContent" th:value="${webContent}" hidden="hidden">
+    <input id="menuId" th:value="${menuId}" hidden="hidden"/>
+    <input id="webmid" th:value="${webmid}" hidden="hidden"/>
+    <input id="webContent" th:value="${webContent}" hidden="hidden"/>
 </div>
 </body>
 </html>

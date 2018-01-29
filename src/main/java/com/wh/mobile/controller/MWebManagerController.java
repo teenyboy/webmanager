@@ -11,6 +11,6 @@ public class MWebManagerController {
 
     @RequestMapping(value = "/toContent")
     public String toContent(Long id,Model view){
-
+        return "";
     }
 }

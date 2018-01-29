@@ -3,6 +3,8 @@ package com.wh.webmanager.service.impl;
 import com.wh.webmanager.dao.WebContentMapper;
 import com.wh.webmanager.domain.WebContent;
 import com.wh.webmanager.service.WebContentService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -10,12 +12,14 @@ import javax.annotation.Resource;
 @Service
 public class WebContentServiceImpl implements WebContentService {
 
+    private static final Logger logger = LoggerFactory.getLogger(WebContentServiceImpl.class);
+
     @Resource
     private WebContentMapper webContentMapper;
 
     @Override
-    public WebContent queryWebContentByWeMId(Long webManagerId) {
-        return webContentMapper.queryWebContentByWeMId(webManagerId);
+    public WebContent queryWebContentByWebMId(Long webManagerId) {
+        return webContentMapper.queryWebContentByWebMId(webManagerId);
     }
 
     @Override

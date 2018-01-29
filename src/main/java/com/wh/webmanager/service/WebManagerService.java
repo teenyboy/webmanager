@@ -20,5 +20,29 @@ public interface WebManagerService {
      */
     public Integer queryWebManagerCount(WebManager webManager);
 
+    /**
+     * 新增消息
+     * @param record
+     * @return
+     */
+    int insertWebManager(WebManager record);
 
+    /**
+     * 查询最新消息
+     * @return
+     */
+    public WebManager queryNewWebManager(WebManager webManager);
+
+    /**
+     * 更新消息
+     * @param webManager
+     * @return
+     */
+    int updateWebManager(WebManager webManager);
+
+    /**
+     * 查询最大grade
+     * @return
+     */
+    Integer queryMaxGradeWebManager();
 }
