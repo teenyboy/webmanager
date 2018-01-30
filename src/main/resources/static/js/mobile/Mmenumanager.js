@@ -6,23 +6,24 @@ var M_MENUMANAGER = window.NameSpace || {};
      * 查询菜单
      */
     M_MENUMANAGER.querymenus = function () {
-        DEFAULT.ajax("/mmenu/queryMenus",null,false,function (res) {
+        DEFAULT.Ajax("/m/menu/queryMenus", null, false, function (res) {
             if (res.result == true) {
-                var managerMenus = eval('('+res.msg+')');
-                for(var i = 0;i<managerMenus.size();i++){
-                    var html = "<div class='ui-grid-a' >" +
+                var managerMenus = eval('(' + res.msg + ')');
+                var html = "";
+                for (var i = 0; i < managerMenus.length; i++) {
+                    html += "<div class='ui-grid-a' >" +
                         "            <div class='ui-block-a'>" +
-                        "                <input type='button'" +
-                        "                   class='ui-shadow ui-btn ui-corner-all ui-mini ui-icon-home ui-btn-icon-top' onclick=M_MENUMANAGER.toContent('"+managerMenus.get(i).id+"')>"+managerMenus.get(i).name+"</input>" +
-                        "            </div>" ;
-                    i++;
-                    if(managerMenus.size() != i){
-                        html += "<div class='ui-block-b'>" +
-                        "                <input type='button'" +
-                        "                   class='ui-shadow ui-btn ui-corner-all ui-mini ui-icon-info ui-btn-icon-top' onclick=M_MENUMANAGER.toContent('"+managerMenus.get(i).id+"')>"+managerMenus.get(i+1).name+"</input>" +
+                        "<a href='javascript:M_MENUMANAGER.toWebManager(" + managerMenus[i].id + ")'" +
+                        "                   class='ui-shadow ui-btn ui-corner-all ui-mini ui-icon-home ui-btn-icon-top'>" + managerMenus[i].name + "</a>" +
                         "            </div>";
+                    i++;
+                    if (managerMenus.length != i) {
+                        html += "<div class='ui-block-b'>" +
+                            "<a href='javascript:M_MENUMANAGER.toWebManager(" + managerMenus[i].id + ")'" +
+                            "                   class='ui-shadow ui-btn ui-corner-all ui-mini ui-icon-home ui-btn-icon-top'>" + managerMenus[i].name + "</a>" +
+                            "            </div>";
                     }
-                    html +="</div>";
+                    html += "</div>";
                 }
                 $("#menu").append(html);
             }
@@ -33,8 +34,8 @@ var M_MENUMANAGER = window.NameSpace || {};
      * 查询内容
      * @param id
      */
-    M_MENUMANAGER.toContent = function (id) {
-        window.location.href = "/m/webmanager/toContent?id="+id;
+    M_MENUMANAGER.toWebManager = function (id) {
+        window.location.href = "/m/webmanager/?id=" + id;
     };
 
 })();

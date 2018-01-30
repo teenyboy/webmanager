@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-      layout:decorator="mdefault">
+      layout:decorator="mobile/mdefault">
 <head>
     <script th:src="@{/js/mobile/Mmenumanager.js}"></script>
     <!-- Initialize Swiper -->
@@ -27,33 +27,36 @@
         $(document).on("pagecreate", "#indexPage", function () {
             M_MENUMANAGER.querymenus();
         });
-
     </script>
 </head>
 <body>
 <div layout:fragment="mcontent" style="width: auto;height: auto;">
-    <div data-role="header">
-        <h1 style="margin: 0%">自贡市自流井区就业服务管理局</h1>
-    </div>
+    <div data-role="page" id="indexPage">
+        <div data-role="header">
+            <h1 style="margin: 0%">自贡市自流井区就业服务管理局</h1>
+        </div>
 
-    <div class="swiper-container">
-        <w></w>
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <!-- Required swiper-lazy class and image source specified in data-src attribute -->
-                <img th:src="@{/images/other/timg.jpg}"/>
+        <div data-role="main" class="ui-content">
+            <div class="swiper-container">
+                <w></w>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <!-- Required swiper-lazy class and image source specified in data-src attribute -->
+                        <img th:src="@{/imgs/timg.jpg}"/>
+                    </div>
+                    <div class="swiper-slide">
+                        <img th:src="@{/imgs/timg.jpg}"/>
+                    </div>
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination swiper-pagination-white"></div>
+                <!-- Navigation -->
+                <div class="swiper-button-next swiper-button-white"></div>
+                <div class="swiper-button-prev swiper-button-white"></div>
             </div>
-            <div class="swiper-slide">
-                <img th:src="@{/images/other/timg.jpg}"/>
+            <div id="menu" style="margin-top: 20px">
             </div>
         </div>
-        <!-- Add Pagination -->
-        <div class="swiper-pagination swiper-pagination-white"></div>
-        <!-- Navigation -->
-        <div class="swiper-button-next swiper-button-white"></div>
-        <div class="swiper-button-prev swiper-button-white"></div>
-    </div>
-    <div id="menu" style="margin-top: 20px">
     </div>
 
 </div>

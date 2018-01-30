@@ -9,9 +9,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MIndexController {
 
     @RequestMapping(value = "/")
+    public String mdefault(){
+        return "mobile/mdefault";
+    }
+
+    @RequestMapping(value = "/index")
     public String index(){
         return "mobile/mindex";
     }
-
 
 }
