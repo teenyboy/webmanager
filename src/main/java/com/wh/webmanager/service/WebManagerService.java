@@ -1,5 +1,7 @@
 package com.wh.webmanager.service;
 
+import com.wh.webmanager.domain.ServiceResult;
+import com.wh.webmanager.domain.WebContent;
 import com.wh.webmanager.domain.WebManager;
 
 import java.util.List;
@@ -21,28 +23,39 @@ public interface WebManagerService {
     public Integer queryWebManagerCount(WebManager webManager);
 
     /**
-     * 新增消息
-     * @param record
-     * @return
-     */
-    int insertWebManager(WebManager record);
-
-    /**
-     * 查询最新消息
-     * @return
-     */
-    public WebManager queryNewWebManager(WebManager webManager);
-
-    /**
-     * 更新消息
+     * 插入内容
+     * @param webContent
      * @param webManager
      * @return
      */
-    int updateWebManager(WebManager webManager);
+    ServiceResult addContent(WebContent webContent, WebManager webManager);
 
     /**
-     * 查询最大grade
+     * 插入内容
+     * @param webContent
+     * @param webManager
      * @return
      */
-    Integer queryMaxGradeWebManager();
+    ServiceResult updateContent(WebContent webContent, WebManager webManager);
+
+    /**
+     * 根据id查询信息
+     * @param id
+     * @return
+     */
+    WebManager queryWebManagerById(Long id);
+
+    /**
+     * 删除内容
+     * @param id
+     * @return
+     */
+    ServiceResult delContent(Long id);
+
+    /**
+     * 置顶内容
+     * @param id
+     * @return
+     */
+    ServiceResult makeUp(Long id);
 }

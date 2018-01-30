@@ -40,8 +40,22 @@ public class ManagerMenuServiceImpl implements ManagerMenuService {
 
     @Override
     public void dealGradeManagerMenu(ManagerMenu managerMenu) {
+
+        /**
+         * 未填写序号
+         */
+        if(managerMenu.getGrade() == null){
+            Integer maxGrade = managerMenuMapper.queryMaxGrade();
+            if(maxGrade == null){
+                maxGrade = 0;
+            }
+            managerMenu.setGrade(maxGrade+1);
+            return;
+        }
+
         Integer grade = managerMenu.getGrade();
         List<ManagerMenu> managerMenus = managerMenuMapper.queryMoreGradeManagerMenus(grade);
+
         for (int i = 0; i < managerMenus.size(); i++) {
             if (managerMenus.get(i).getGrade().equals(grade + i)) {
                 managerMenus.get(i).setGrade(managerMenus.get(i).getGrade() + 1);

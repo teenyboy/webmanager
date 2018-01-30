@@ -22,7 +22,7 @@ var DEFAULT = window.NameSpace || {};
                 }
                 var resObj = eval('('+res.msg+')');
                 for(var i = 0;i<resObj.length;i++){
-                    $("#managerMenus").append('<li><a href="/webmanager/?id='+resObj[i].id+'&name='+resObj[i].name+'"><i class="fa fa-circle-o"></i>'+resObj[i].name+'</a></li>');
+                    $("#managerMenus").append('<li><a href="/webmanager/?id='+resObj[i].id+'"><i class="fa fa-circle-o"></i>'+resObj[i].name+'</a></li>');
                 }
             } else {
                 alert(res.msg);

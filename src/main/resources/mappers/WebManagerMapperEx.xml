@@ -6,31 +6,31 @@
   <sql id="Base_Query">
     where 1 = 1
     <if test="id != null" >
-      AND id = #{id,jdbcType=BIGINT},
+      AND id = #{id,jdbcType=BIGINT}
     </if>
     <if test="imgpath != null" >
-      AND imgpath = #{imgpath,jdbcType=VARCHAR},
+      AND imgpath = #{imgpath,jdbcType=VARCHAR}
     </if>
     <if test="grade != null" >
-      AND grade = #{grade,jdbcType=INTEGER},
+      AND grade = #{grade,jdbcType=INTEGER}
     </if>
     <if test="menuid != null" >
-      AND menuid = #{menuid,jdbcType=BIGINT},
+      AND menuid = #{menuid,jdbcType=BIGINT}
     </if>
     <if test="title != null" >
-      AND title = #{title,jdbcType=VARCHAR},
+      AND title = #{title,jdbcType=VARCHAR}
     </if>
     <if test="createtime != null" >
-      AND createtime = #{createtime,jdbcType=TIMESTAMP},
+      AND createtime = #{createtime,jdbcType=TIMESTAMP}
     </if>
     <if test="createperson != null" >
-      AND createperson = #{createperson,jdbcType=VARCHAR},
+      AND createperson = #{createperson,jdbcType=VARCHAR}
     </if>
     <if test="updatetime != null" >
-      AND updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      AND updatetime = #{updatetime,jdbcType=TIMESTAMP}
     </if>
     <if test="updateperson != null" >
-      AND updateperson = #{updateperson,jdbcType=VARCHAR},
+      AND updateperson = #{updateperson,jdbcType=VARCHAR}
     </if>
     <if test="yn != null" >
       AND yn = #{yn,jdbcType=TINYINT}
@@ -60,4 +60,11 @@
     from webmanager
     <include refid="Base_Query"/>
   </select>
+
+  <update id="updateByGrade" parameterType="java.lang.Integer">
+    UPDATE  webmanager
+    set grade = 1+#{grade,jdbcType=INTEGER}
+    WHERE
+    grade = #{grade,jdbcType=INTEGER}
+  </update>
 </mapper>

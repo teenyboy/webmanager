@@ -1,9 +1,11 @@
 package com.wh.webmanager.controller;
 
+import com.wh.webmanager.domain.ManagerMenu;
 import com.wh.webmanager.domain.ServiceResult;
 import com.wh.webmanager.domain.WebContent;
 import com.wh.webmanager.domain.WebManager;
 import com.wh.webmanager.domain.enums.YnEnum;
+import com.wh.webmanager.service.ManagerMenuService;
 import com.wh.webmanager.service.WebContentService;
 import com.wh.webmanager.service.WebManagerService;
 import org.slf4j.Logger;
@@ -29,10 +31,13 @@ public class WebManagerController extends BaseController {
     private WebManagerService webManagerService;
     @Resource
     private WebContentService webContentService;
+    @Resource
+    private ManagerMenuService managerMenuService;
 
     @RequestMapping(value = "/")
-    public String index(Integer id,String name,Model view){
-        view.addAttribute("menuName",name);
+    public String index(Long id,Model view){
+        ManagerMenu managerMenu = managerMenuService.queryMenuById(id);
+        view.addAttribute("menuName",managerMenu.getName());
         view.addAttribute("menuId",id);
         return "/sys/webmanager/webmanager";
     }
@@ -51,7 +56,10 @@ public class WebManagerController extends BaseController {
         if(webmid != null){
             if(webmid!=0){
                 WebContent webContent = webContentService.queryWebContentByWebMId(webmid);
-                view.addAttribute("webContent",webContent);
+                view.addAttribute("content",webContent.getContent());
+                view.addAttribute("webContentId",webContent.getId());
+                WebManager webManager = webManagerService.queryWebManagerById(webmid);
+                view.addAttribute("title",webManager.getTitle());
             }
         }else {
             return "error";
@@ -63,49 +71,17 @@ public class WebManagerController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/addOrUpdateContent")
-    public String addOrUpdateContent(WebContent webContent,WebManager webManager){
+    public String addOrUpdateContent(WebContent webContent,WebManager webManager,Long webContentId){
         ServiceResult serviceResult = null;
         try {
             webContent.setYn(YnEnum.Y.getValue());
             webManager.setYn(YnEnum.Y.getValue());
-
             if(webContent.getWebmid() == 0){
-                Integer maxGrade = webManagerService.queryMaxGradeWebManager();
-                if(maxGrade == null){
-                    maxGrade = 0;
-                }
-                webManager.setGrade(maxGrade+1);
-                webManager.setCreatetime(new Date());
-                int result = webManagerService.insertWebManager(webManager);
-                if(result == 1){
-                    WebManager queryWebManager = new WebManager();
-                    queryWebManager.setYn(YnEnum.Y.getValue());
-                    queryWebManager.setGrade(webManager.getGrade());
-                    WebManager newWebManager = webManagerService.queryNewWebManager(queryWebManager);
-                    webContent.setWebmid(newWebManager.getId());
-                    webContent.setCreatetime(new Date());
-                    int webContentResult = webContentService.insertWebContent(webContent);
-                    if(webContentResult == 1){
-                        serviceResult = new ServiceResult(true,"新增web文本成功");
-                    }else{
-                        serviceResult = new ServiceResult(false,"新增web文本失败");
-                    }
-                }else {
-                    serviceResult = new ServiceResult(false,"新增web信息失败");
-                }
+                serviceResult = webManagerService.addContent(webContent,webManager);
             }else{
-
-                int result = webManagerService.updateWebManager(webManager);
-                if(result == 1){
-                    int webContentResult = webContentService.updateWebContent(webContent);
-                    if(webContentResult == 1){
-                        serviceResult = new ServiceResult(true,"更新web文本成功");
-                    }else {
-                        serviceResult = new ServiceResult(false,"更新web文本失败");
-                    }
-                }else {
-                    serviceResult = new ServiceResult(false,"更新web信息失败");
-                }
+                webContent.setId(webContentId);
+                webManager.setId(webContent.getWebmid());
+                serviceResult = webManagerService.updateContent(webContent,webManager);
             }
         }catch (Exception e){
             logger.error("增加/更新内容出错",e);
@@ -119,17 +95,23 @@ public class WebManagerController extends BaseController {
     public String delWebContent(Long id){
         ServiceResult serviceResult = null;
         try {
-            WebContent webContent = webContentService.queryWebContentByid(id);
-            if(webContent!= null){
-                webContent.setYn(YnEnum.N.getValue());
-                webContent.setUpdatetime(new Date());
-                webContentService.updateWebContent(webContent);
-                serviceResult =  new ServiceResult(true,"删除成功");
-            }
-            serviceResult =  new ServiceResult(false,"已删除，刷新页面");
+            serviceResult = webManagerService.delContent(id);
         }catch (Exception e){
             logger.error("删除失败",e);
             serviceResult =  new ServiceResult(false,"删除失败");
+        }
+        return toResult(serviceResult);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/makeUp")
+    public String makeUp(Long id){
+        ServiceResult serviceResult = null;
+        try {
+            serviceResult = webManagerService.makeUp(id);
+        }catch (Exception e){
+            logger.error("删除失败",e);
+            serviceResult =  new ServiceResult(false,"操作失败");
         }
         return toResult(serviceResult);
     }

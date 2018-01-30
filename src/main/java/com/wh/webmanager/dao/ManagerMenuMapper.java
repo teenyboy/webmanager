@@ -32,6 +32,9 @@ public interface ManagerMenuMapper {
     @Select("select * from managermenu where grade >= #{grade} and yn = 1 order by grade asc")
     List<ManagerMenu> queryMoreGradeManagerMenus(Integer grade);
 
+    @Select("select max(grade) from managermenu where yn = 1")
+    Integer queryMaxGrade();
+
     void updateMoreGradeList(List<ManagerMenu> managerMenus);
 
     @Select("select * from managermenu where id = #{id} and yn = 1")

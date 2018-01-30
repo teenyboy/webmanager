@@ -5,8 +5,8 @@ var WEBMANAGER = window.NameSpace || {};
     /**
      * 查询栏目网站信息
      */
-    WEBMANAGER.queryWebs = function () {
-        DEFAULT.ajaxQueryTable("/webmanager/queryWebs", null, "#websDataTables", null);
+    WEBMANAGER.queryWebs = function (data) {
+        DEFAULT.ajaxQueryTable("/webmanager/queryWebs", data, "#websDataTables", null);
     };
 
     WEBMANAGER.addOrUpdateView = function (webmid) {
@@ -14,6 +14,16 @@ var WEBMANAGER = window.NameSpace || {};
         window.location.href = "/webmanager/addOrUpdateView?webmid="+webmid+"&menuId="+menuId;
     };
 
+    /**
+     * 置顶
+     * @param webmid
+     */
+    WEBMANAGER.makeUp = function (webmid) {
+        var data = {id:webmid};
+        DEFAULT.Ajax("/webmanager/makeUp",data,false,function (res) {
+            window.location.reload();
+        })
+    };
 
 
     /**
@@ -32,7 +42,8 @@ var WEBMANAGER = window.NameSpace || {};
      */
     WEBMANAGER.operation = function (data) {
         return '<div class="btn-group">\n' +
-            '                      <button type="button" class="btn btn-info" onclick="WEBMANAGER.addOrUpdateView('+data+')"><i class="glyphicon glyphicon-pencil"></i></button>\n' +
+            '                      <button type="button" class="btn btn-info" onclick="WEBMANAGER.makeUp('+data+')"><i class="glyphicon glyphicon-upload"></i></button>\n' +
+            '                      <button type="button" style="margin-left: 10px;" class="btn btn-info" onclick="WEBMANAGER.addOrUpdateView('+data+')"><i class="glyphicon glyphicon-pencil"></i></button>\n' +
             '                      <button type="button" style="margin-left: 10px;" class="btn btn-danger" onclick="WEBMANAGER.delWebContent('+data+')"><i class="glyphicon glyphicon-remove"></i></i></button>\n' +
             '                    </div>'
     };

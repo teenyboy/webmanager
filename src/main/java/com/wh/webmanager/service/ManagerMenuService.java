@@ -1,6 +1,7 @@
 package com.wh.webmanager.service;
 
 import com.wh.webmanager.domain.ManagerMenu;
+import com.wh.webmanager.domain.ServiceResult;
 
 import java.util.List;
 

@@ -6,7 +6,9 @@
     <script th:src="@{/js/web/webmanager.js}"></script>
     <script>
         $(document).ready(function () {
-            WEBMANAGER.queryWebs();
+            var menuid = $("#menuId").val();
+            var data = {menuid:menuid};
+            WEBMANAGER.queryWebs(data);
         });
     </script>
 </head>
@@ -19,7 +21,7 @@
     </div>
     <div class="box" style="margin-top: 20px">
         <div class="box-header">
-            <h3 class="box-title" th:text="${webmName}"></h3>
+            <h3 class="box-title" th:text="${menuName}"></h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">

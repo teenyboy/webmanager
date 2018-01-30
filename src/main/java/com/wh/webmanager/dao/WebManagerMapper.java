@@ -28,6 +28,22 @@ public interface WebManagerMapper {
 
     WebManager queryNewWebManager(WebManager webManager);
 
+    @Select("select * from webmanager where id = #{id}")
+    WebManager queryWebManagerById(Long id);
+
     @Select("select max(grade) from webmanager where yn = 1")
     Integer queryMaxGradeWebManager();
+
+    /**
+     * 求出大于等于1的所有消息
+     * @return
+     */
+    @Select("select * from webmanager where yn = 1 and grade >= 1 order by grade asc")
+    List<WebManager> queryMoreWebManager();
+    /**
+     * 递增
+     * @param grade
+     * @return
+     */
+    Integer updateByGrade(Integer grade);
 }

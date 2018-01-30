@@ -6,7 +6,7 @@ var WEBCONTENT = window.NameSpace || {};
         var webmId = $("#webmId").val();
         var webmName = $("#webmName").val();
         $("#updateId").val("");
-        window.location.href = "/webmanager/?id="+webmId+"&name="+webmName;
+        window.location.href = "/webmanager/?id="+webmId;
     };
 
     /**
@@ -24,14 +24,14 @@ var WEBCONTENT = window.NameSpace || {};
         var menuId = $("#menuId").val();
         var title = $("#inputTitle").val();
         var content = UE.getEditor('inputContent').getContent();
-        var params = {webmid:webmid,menuid:menuId,content:content,title:title};
+        var webContentId = $("#webContentId").val();
+        var params = {webmid:webmid,menuid:menuId,content:content,title:title,webContentId:webContentId};
         DEFAULT.Ajax("/webmanager/addOrUpdateContent",params,false,function (res) {
             alert(res.msg);
             if (res.result == true) {
-                var webmId = $("#webmId").val();
-                var webmName = $("#webmName").val();
+                var menuId = $("#menuId").val();
                 $("#updateId").val("");
-                window.location.href = "/webmanager/?id="+webmId+"&name="+webmName;
+                window.location.href = "/webmanager/?id="+menuId;
             }
         });
     };

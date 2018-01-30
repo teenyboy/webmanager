@@ -50,6 +50,7 @@ public class ManagerMenuController extends BaseController {
                 serviceResult =  new ServiceResult(false,"已删除，请刷新");
             }else{
                 managerMenu.setUpdatetime(new Date());
+                managerMenu.setYn(YnEnum.N.getValue());
                 managerMenuService.updateByPrimaryKeySelective(managerMenu);
                 serviceResult = new ServiceResult(true, "删除成功");
             }

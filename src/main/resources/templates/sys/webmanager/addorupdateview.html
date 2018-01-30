@@ -8,8 +8,10 @@
         $(document).ready(function () {
             //加载ueditor
             var ue = UE.getEditor('inputContent');
-            var webContent = $("#webContent").val();
-            ue.setContent(webContent);
+            ue.addListener("ready", function () {
+                var content = $("#content").val();
+                ue.setContent(content);
+            });
         });
     </script>
 </head>
@@ -28,7 +30,7 @@
                 <div class="form-group">
                     <div class="col-sm-12">
                         <label for="inputTitle">标题</label>
-                        <input type="text" class="form-control" id="inputTitle" placeholder="标题"/>
+                        <input type="text" class="form-control" id="inputTitle" placeholder="标题" th:value="${title}"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -50,7 +52,8 @@
 
     <input id="menuId" th:value="${menuId}" hidden="hidden"/>
     <input id="webmid" th:value="${webmid}" hidden="hidden"/>
-    <input id="webContent" th:value="${webContent}" hidden="hidden"/>
+    <input id="content" th:value="${content}" hidden="hidden"/>
+    <input id="webContentId" th:value="${webContentId}" hidden="hidden"/>
 </div>
 </body>
 </html>
