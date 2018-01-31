@@ -9,23 +9,82 @@ var M_MENUMANAGER = window.NameSpace || {};
         DEFAULT.Ajax("/m/menu/queryMenus", null, false, function (res) {
             if (res.result == true) {
                 var managerMenus = eval('(' + res.msg + ')');
-                var html = "";
                 for (var i = 0; i < managerMenus.length; i++) {
-                    html += "<div class='ui-grid-a' >" +
-                        "            <div class='ui-block-a'>" +
-                        "<a href='javascript:M_MENUMANAGER.toWebManager(" + managerMenus[i].id + ")'" +
-                        "                   class='ui-shadow ui-btn ui-corner-all ui-mini ui-icon-home ui-btn-icon-top'>" + managerMenus[i].name + "</a>" +
-                        "            </div>";
+
+                    var oneHtml = "<li onclick='javascript:M_MENUMANAGER.toWebManager("+ managerMenus[i].id + ")'>" +
+                        "<i class='fa fa-newspaper-o'></i>"+
+                        "<p>"+managerMenus[i].name+"</p>" +
+                        "</li>";
+                    $("#menu").append(oneHtml);
+
                     i++;
                     if (managerMenus.length != i) {
-                        html += "<div class='ui-block-b'>" +
-                            "<a href='javascript:M_MENUMANAGER.toWebManager(" + managerMenus[i].id + ")'" +
-                            "                   class='ui-shadow ui-btn ui-corner-all ui-mini ui-icon-home ui-btn-icon-top'>" + managerMenus[i].name + "</a>" +
-                            "            </div>";
+                        var twoHtml = "<li class='borders' onclick='javascript:M_MENUMANAGER.toWebManager("+ managerMenus[i].id + ")'>" +
+                            "<i class='fa fa-archive'></i>"+
+                            "<p>"+managerMenus[i].name+"</p>" +
+                            "</li>";
+                        $("#menu").append(twoHtml);
                     }
-                    html += "</div>";
+
+                    i++;
+                    if (managerMenus.length != i) {
+                        var twoHtml = "<li onclick='javascript:M_MENUMANAGER.toWebManager("+ managerMenus[i].id + ")'>" +
+                            "<i class='fa fa-book'></i>"+
+                            "<p>"+managerMenus[i].name+"</p>" +
+                            "</li>";
+                        $("#menu").append(twoHtml);
+                    }
+
+                    i++;
+                    var oneHtml = "<li onclick='javascript:M_MENUMANAGER.toWebManager("+ managerMenus[i].id + ")'>" +
+                        "<i class='fa fa-cloud'></i>"+
+                        "<p>"+managerMenus[i].name+"</p>" +
+                        "</li>";
+                    $("#menu").append(oneHtml);
+
+                    i++;
+                    if (managerMenus.length != i) {
+                        var twoHtml = "<li class='borders' onclick='javascript:M_MENUMANAGER.toWebManager("+ managerMenus[i].id + ")'>" +
+                            "<i class='fa fa-cube'></i>"+
+                            "<p>"+managerMenus[i].name+"</p>" +
+                            "</li>";
+                        $("#menu").append(twoHtml);
+                    }
+
+                    i++;
+                    if (managerMenus.length != i) {
+                        var twoHtml = "<li onclick='javascript:M_MENUMANAGER.toWebManager("+ managerMenus[i].id + ")'>" +
+                            "<i class='fa fa-desktop'></i>"+
+                            "<p>"+managerMenus[i].name+"</p>" +
+                            "</li>";
+                        $("#menu").append(twoHtml);
+                    }
+
+                    i++;
+                    var oneHtml = "<li onclick='javascript:M_MENUMANAGER.toWebManager("+ managerMenus[i].id + ")'>" +
+                        "<i class='fa fa-folder-open'></i>"+
+                        "<p>"+managerMenus[i].name+"</p>" +
+                        "</li>";
+                    $("#menu").append(oneHtml);
+
+                    i++;
+                    if (managerMenus.length != i) {
+                        var twoHtml = "<li class='borders' onclick='javascript:M_MENUMANAGER.toWebManager("+ managerMenus[i].id + ")'>" +
+                            "<i class='fa fa-gear'></i>"+
+                            "<p>"+managerMenus[i].name+"</p>" +
+                            "</li>";
+                        $("#menu").append(twoHtml);
+                    }
+
+                    i++;
+                    if (managerMenus.length != i) {
+                        var twoHtml = "<li onclick='javascript:M_MENUMANAGER.toWebManager("+ managerMenus[i].id + ")'>" +
+                            "<i class='fa fa-server'></i>"+
+                            "<p>"+managerMenus[i].name+"</p>" +
+                            "</li>";
+                        $("#menu").append(twoHtml);
+                    }
                 }
-                $("#menu").append(html);
             }
         })
     };

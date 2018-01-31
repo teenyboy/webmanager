@@ -12,7 +12,7 @@ var M_WEBMANAGER = window.NameSpace || {};
             if (res.result == true) {
                 var webManagers = eval('(' + res.msg + ')');
                 for(var i = 0;i<webManagers.length;i++){
-                    var html ='<li><a href="javascript:M_WEBMANAGER.toContent('+webManagers[i].id+')"><h2>'+webManagers[i].title+'</h2></a></li>';
+                    var html ='<li><a href="javascript:M_WEBMANAGER.toContent('+webManagers[i].id+')"><p>'+webManagers[i].title+'</p></a></li>';
                     $("#webManagerList").append(html);
                 }
                 $('#webManagerList').listview('refresh');

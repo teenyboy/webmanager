@@ -6,26 +6,23 @@
     <script th:src="@{/js/mobile/Mmenumanager.js}"></script>
     <!-- Initialize Swiper -->
     <script type="text/javascript">
-        var swiper = new Swiper('.swiper-container', {
-            // Enable lazy loading
-            auto: true,
-            autoplay: {
-                delay: 3000,
-                stopOnLastSlide: false,
-                disableOnInteraction: true
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev'
-            }
-        });
 
         $(document).on("pagecreate", "#indexPage", function () {
             M_MENUMANAGER.querymenus();
+
+            var swiper = new Swiper('.swiper-container', {
+                // Enable lazy loading
+                auto: true,
+                autoplay: {
+                    delay: 300,
+                    stopOnLastSlide: false,
+                    disableOnInteraction: true
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev'
+                }
+            });
         });
     </script>
 </head>
@@ -36,26 +33,34 @@
             <h1 style="margin: 0%">自贡市自流井区就业服务管理局</h1>
         </div>
 
-        <div data-role="main" class="ui-content">
-            <div class="swiper-container">
-                <w></w>
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <!-- Required swiper-lazy class and image source specified in data-src attribute -->
-                        <img th:src="@{/imgs/timg.jpg}"/>
+        <div id="banner" style="margin-top: 10pt">
+            <div class="addWrap">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <!-- Required swiper-lazy class and image source specified in data-src attribute -->
+                            <img style="width: 100%" th:src="@{/imgs/timg2.jpg}"/>
+                        </div>
+                        <div class="swiper-slide">
+                            <img style="width: 100%" th:src="@{/imgs/timg3.jpg}"/>
+                        </div>
                     </div>
-                    <div class="swiper-slide">
-                        <img th:src="@{/imgs/timg.jpg}"/>
-                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination swiper-pagination-white"></div>
+                    <!-- Navigation -->
+                    <div class="swiper-button-next swiper-button-white"></div>
+                    <div class="swiper-button-prev swiper-button-white"></div>
                 </div>
-                <!-- Add Pagination -->
-                <div class="swiper-pagination swiper-pagination-white"></div>
-                <!-- Navigation -->
-                <div class="swiper-button-next swiper-button-white"></div>
-                <div class="swiper-button-prev swiper-button-white"></div>
             </div>
-            <div id="menu" style="margin-top: 20px">
+        </div>
+
+        <div data-role="main" >
+            <div class="us-content" style="margin-top: 30pt">
+                <ul id="menu" class="us-ul">
+                </ul>
             </div>
+            <!--<div id="menu" style="margin-top: 20px">-->
+            <!--</div>-->
         </div>
     </div>
 
