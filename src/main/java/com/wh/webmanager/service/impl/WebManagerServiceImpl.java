@@ -53,12 +53,12 @@ public class WebManagerServiceImpl implements WebManagerService{
             webContent.setCreatetime(new Date());
             int webContentResult = webContentService.insertWebContent(webContent);
             if(webContentResult == 1){
-                serviceResult = new ServiceResult(true,"新增web文本成功");
+                serviceResult = new ServiceResult(true,"新增文本成功");
             }else{
-                serviceResult = new ServiceResult(false,"新增web文本失败");
+                serviceResult = new ServiceResult(false,"新增文本失败");
             }
         }else {
-            serviceResult = new ServiceResult(false,"新增web信息失败");
+            serviceResult = new ServiceResult(false,"新增信息失败");
         }
         return serviceResult;
     }

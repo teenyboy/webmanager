@@ -48,6 +48,16 @@ var WEBMANAGER = window.NameSpace || {};
             '                    </div>'
     };
 
+
+    /**
+     * 处理文本太长
+     * @param data
+     * @returns {string}
+     */
+    WEBMANAGER.tolongContent = function (data) {
+        return "<div style='width:200px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;' title="+data+">"+data+"</div>"
+    };
+
     /**
      * 删除栏目
      * @param id

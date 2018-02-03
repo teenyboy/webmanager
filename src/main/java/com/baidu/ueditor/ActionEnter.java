@@ -73,6 +73,10 @@ public class ActionEnter {
 				return this.configManager.getAllConfig().toString();
 				
 			case ActionMap.UPLOAD_IMAGE:
+				conf = this.configManager.getConfig( actionCode );
+				state = new Uploader( request, conf ).doExec();
+				break;
+
 			case ActionMap.UPLOAD_SCRAWL:
 			case ActionMap.UPLOAD_VIDEO:
 			case ActionMap.UPLOAD_FILE:

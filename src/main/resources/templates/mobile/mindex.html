@@ -7,23 +7,25 @@
     <!-- Initialize Swiper -->
     <script type="text/javascript">
 
-        $(document).on("pagecreate", "#indexPage", function () {
+        $(document).on("pageshow", "#indexPage", function () {
             M_MENUMANAGER.querymenus();
 
-            var swiper = new Swiper('.swiper-container', {
+            var mySwiper = new Swiper ('.swiper-container', {
                 // Enable lazy loading
                 auto: true,
+                loop:true,
                 autoplay: {
-                    delay: 300,
+                    delay: 3000,
                     stopOnLastSlide: false,
                     disableOnInteraction: true
                 },
                 navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev'
+                    nextEl: "#swiper-next",
+                    prevEl: "#swiper-prev"
                 }
             });
         });
+
     </script>
 </head>
 <body>
@@ -35,7 +37,7 @@
 
         <div id="banner" style="margin-top: 10pt">
             <div class="addWrap">
-                <div class="swiper-container">
+                <div id="swiper" class="swiper-container">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
                             <!-- Required swiper-lazy class and image source specified in data-src attribute -->
@@ -48,8 +50,8 @@
                     <!-- Add Pagination -->
                     <div class="swiper-pagination swiper-pagination-white"></div>
                     <!-- Navigation -->
-                    <div class="swiper-button-next swiper-button-white"></div>
-                    <div class="swiper-button-prev swiper-button-white"></div>
+                    <div id="swiper-next" class="swiper-button-next swiper-button-white"></div>
+                    <div id="swiper-prev" class="swiper-button-prev swiper-button-white"></div>
                 </div>
             </div>
         </div>
@@ -63,7 +65,6 @@
             <!--</div>-->
         </div>
     </div>
-
 </div>
 </body>
 </html>

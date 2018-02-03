@@ -31,8 +31,8 @@ var DEFAULT = window.NameSpace || {};
     };
 
     DEFAULT.user =function () {
-        $("#userNameSmall").text("wang");
-        $("#userNameDropDown").text("wang");
+        $("#userNameSmall").text("admin");
+        $("#userNameDropDown").text("admin");
     };
 
     DEFAULT.toMenuContent = function (menuId) {

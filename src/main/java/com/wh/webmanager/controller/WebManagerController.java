@@ -39,7 +39,7 @@ public class WebManagerController extends BaseController {
         ManagerMenu managerMenu = managerMenuService.queryMenuById(id);
         view.addAttribute("menuName",managerMenu.getName());
         view.addAttribute("menuId",id);
-        return "/sys/webmanager/webmanager";
+        return "sys/webmanager/webmanager";
     }
 
     @ResponseBody
@@ -66,7 +66,7 @@ public class WebManagerController extends BaseController {
         }
         view.addAttribute("webmid",webmid);
         view.addAttribute("menuId",menuId);
-        return "/sys/webmanager/addorupdateview";
+        return "sys/webmanager/addorupdateview";
     }
 
     @ResponseBody

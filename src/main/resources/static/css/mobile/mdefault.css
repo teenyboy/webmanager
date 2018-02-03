@@ -49,9 +49,11 @@ input {outline:none;-webkit-appearance: none;}
 .us-but{ float: right; margin-top: 100px; margin-right: 13%; background: #fff;color: #4f1010;font-size: 4vw;padding:1% 6%; border-radius: 2px;cursor: pointer;}
 .us-content{width: 100%; background: #fff;}
 .us-ul{ width: 100%; overflow: hidden;}
-.us-ul li{ width:33%; float: left; border-bottom:1px solid #e5e5e5; text-align: center; padding: 5% 0 3%;}
+.us-ul li{ width:50%; float: left; border-bottom:1px solid #e5e5e5; text-align: center; padding: 5% 0 3%;}
 .borders{ border-left: 1px solid #e5e5e5;border-right: 1px solid #e5e5e5; cursor: pointer;}
-.us-ul li p{ font-size: 3.5vw; color: #6e6e6e; margin-top: 4%;}
+.borders-left{ border-left: 1px solid #e5e5e5; cursor: pointer;}
+.borders-right{ border-right: 1px solid #e5e5e5; cursor: pointer;}
+.us-ul li p{ font-size: 3.5vw; color: #6e6e6e;}
 .us-list-title{ font-weight: normal!important; font-size: 4.5vw; color: #3b3b3b;}
 .us-list-brief{font-size: 4vw!important; color: #7b7b7b!important;}
 .bubble{width: 96%; padding: 1% 2%; background: #efb907;color: #fff;font-size: 4vw; display: block;}

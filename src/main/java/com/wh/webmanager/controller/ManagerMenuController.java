@@ -28,7 +28,7 @@ public class ManagerMenuController extends BaseController {
 
     @RequestMapping(value = "/")
     public String menu() {
-        return "/sys/menu/menumanager";
+        return "sys/menu/menumanager";
     }
 
     @ResponseBody

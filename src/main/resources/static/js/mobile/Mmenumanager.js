@@ -11,78 +11,87 @@ var M_MENUMANAGER = window.NameSpace || {};
                 var managerMenus = eval('(' + res.msg + ')');
                 for (var i = 0; i < managerMenus.length; i++) {
 
-                    var oneHtml = "<li onclick='javascript:M_MENUMANAGER.toWebManager("+ managerMenus[i].id + ")'>" +
+                    var twoHtml = "<li><div style='margin-top: 4%' onclick='javascript:M_MENUMANAGER.toWebManager("+ managerMenus[i].id + ")'>" +
                         "<i class='fa fa-newspaper-o'></i>"+
                         "<p>"+managerMenus[i].name+"</p>" +
-                        "</li>";
-                    $("#menu").append(oneHtml);
+                        "</div></li>";
+                    $("#menu").append(twoHtml);
 
                     i++;
                     if (managerMenus.length != i) {
-                        var twoHtml = "<li class='borders' onclick='javascript:M_MENUMANAGER.toWebManager("+ managerMenus[i].id + ")'>" +
+                        var twoHtml = "<li><div style='margin-top: 4%' class='borders' onclick='javascript:M_MENUMANAGER.toWebManager("+ managerMenus[i].id + ")'>" +
                             "<i class='fa fa-archive'></i>"+
                             "<p>"+managerMenus[i].name+"</p>" +
-                            "</li>";
+                            "</div></li>";
                         $("#menu").append(twoHtml);
+                    }else{
+                        break;
                     }
 
                     i++;
                     if (managerMenus.length != i) {
-                        var twoHtml = "<li onclick='javascript:M_MENUMANAGER.toWebManager("+ managerMenus[i].id + ")'>" +
+                        var twoHtml = "<li><div style='margin-top: 4%' onclick='javascript:M_MENUMANAGER.toWebManager("+ managerMenus[i].id + ")'>" +
                             "<i class='fa fa-book'></i>"+
                             "<p>"+managerMenus[i].name+"</p>" +
-                            "</li>";
+                            "</div></li>";
                         $("#menu").append(twoHtml);
+                    }else{
+                        break;
                     }
 
                     i++;
-                    var oneHtml = "<li onclick='javascript:M_MENUMANAGER.toWebManager("+ managerMenus[i].id + ")'>" +
-                        "<i class='fa fa-cloud'></i>"+
-                        "<p>"+managerMenus[i].name+"</p>" +
-                        "</li>";
-                    $("#menu").append(oneHtml);
+                    if (managerMenus.length != i) {
+                        var oneHtml = "<li><div style='margin-top: 4%' class='borders' onclick='javascript:M_MENUMANAGER.toWebManager(" + managerMenus[i].id + ")'>" +
+                            "<i class='fa fa-cloud'></i>" +
+                            "<p>" + managerMenus[i].name + "</p>" +
+                            "</div></li>";
+                        $("#menu").append(oneHtml);
+                    }else{
+                        break;
+                    }
 
                     i++;
                     if (managerMenus.length != i) {
-                        var twoHtml = "<li class='borders' onclick='javascript:M_MENUMANAGER.toWebManager("+ managerMenus[i].id + ")'>" +
+                        var twoHtml = "<li ><div style='margin-top: 4%' onclick='javascript:M_MENUMANAGER.toWebManager("+ managerMenus[i].id + ")'>" +
                             "<i class='fa fa-cube'></i>"+
                             "<p>"+managerMenus[i].name+"</p>" +
-                            "</li>";
+                            "</div></li>";
                         $("#menu").append(twoHtml);
+                    }else{
+                        break;
                     }
 
                     i++;
                     if (managerMenus.length != i) {
-                        var twoHtml = "<li onclick='javascript:M_MENUMANAGER.toWebManager("+ managerMenus[i].id + ")'>" +
+                        var twoHtml = "<li ><div style='margin-top: 4%' class='borders' onclick='javascript:M_MENUMANAGER.toWebManager("+ managerMenus[i].id + ")'>" +
                             "<i class='fa fa-desktop'></i>"+
                             "<p>"+managerMenus[i].name+"</p>" +
-                            "</li>";
+                            "</div></li>";
                         $("#menu").append(twoHtml);
+                    }else{
+                        break;
                     }
 
                     i++;
-                    var oneHtml = "<li onclick='javascript:M_MENUMANAGER.toWebManager("+ managerMenus[i].id + ")'>" +
-                        "<i class='fa fa-folder-open'></i>"+
-                        "<p>"+managerMenus[i].name+"</p>" +
-                        "</li>";
-                    $("#menu").append(oneHtml);
+                    if (managerMenus.length != i) {
+                        var oneHtml = "<li ><div style='margin-top: 4%' onclick='javascript:M_MENUMANAGER.toWebManager(" + managerMenus[i].id + ")'>" +
+                            "<i class='fa fa-folder-open'></i>" +
+                            "<p>" + managerMenus[i].name + "</p>" +
+                            "</div></li>";
+                        $("#menu").append(oneHtml);
+                    }else{
+                        break;
+                    }
 
                     i++;
                     if (managerMenus.length != i) {
-                        var twoHtml = "<li class='borders' onclick='javascript:M_MENUMANAGER.toWebManager("+ managerMenus[i].id + ")'>" +
+                        var twoHtml = "<li ><div style='margin-top: 4%' class='borders' onclick='javascript:M_MENUMANAGER.toWebManager("+ managerMenus[i].id + ")'>" +
                             "<i class='fa fa-gear'></i>"+
                             "<p>"+managerMenus[i].name+"</p>" +
-                            "</li>";
+                            "</div></li>";
                         $("#menu").append(twoHtml);
-                    }
-
-                    i++;
-                    if (managerMenus.length != i) {
-                        var twoHtml = "<li onclick='javascript:M_MENUMANAGER.toWebManager("+ managerMenus[i].id + ")'>" +
-                            "<i class='fa fa-server'></i>"+
-                            "<p>"+managerMenus[i].name+"</p>" +
-                            "</li>";
-                        $("#menu").append(twoHtml);
+                    }else{
+                        break;
                     }
                 }
             }
