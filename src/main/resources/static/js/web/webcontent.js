@@ -25,8 +25,8 @@ var WEBCONTENT = window.NameSpace || {};
         var title = $("#inputTitle").val();
         var content = UE.getEditor('inputContent').getContent();
 
-        if(content.length>3000){
-            alert("超过限制3000字符了");
+        if(content.length>15000){
+            alert("超过限制8000字符了");
             return;
         }
 
