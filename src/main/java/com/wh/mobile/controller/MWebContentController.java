@@ -24,8 +24,13 @@ public class MWebContentController {
     public String index(Long webMid,Model view){
         WebContent webContent = webContentService.queryWebContentByWebMId(webMid);
         WebManager webManager = webManagerService.queryWebManagerById(webMid);
-        view.addAttribute("title",webManager.getTitle());
-        view.addAttribute("content",webContent.getContent());
+        if(webManager != null){
+            view.addAttribute("title",webManager.getTitle());
+        }
+        if(webContent != null){
+            view.addAttribute("content",webContent.getContent());
+        }
+
         return "mobile/mwebcontent";
     }
 }

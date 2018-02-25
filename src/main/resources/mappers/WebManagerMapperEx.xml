@@ -46,6 +46,14 @@
       limit ${startIndex}, ${pageSize}
   </select>
 
+  <select id="queryWebManagerAll" parameterType="com.wh.webmanager.domain.WebManager" resultType="com.wh.webmanager.domain.WebManager">
+    select
+    <include refid="Base_Column_List" />
+    from webmanager
+    <include refid="Base_Query"/>
+    order by grade asc
+  </select>
+
   <select id="queryNewWebManager" parameterType="com.wh.webmanager.domain.WebManager" resultType="com.wh.webmanager.domain.WebManager">
     select
     <include refid="Base_Column_List" />

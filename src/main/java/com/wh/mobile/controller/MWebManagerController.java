@@ -39,7 +39,7 @@ public class MWebManagerController extends BaseController{
         ServiceResult serviceResult = null;
         try {
             webManager.setYn(YnEnum.Y.getValue());
-            List<WebManager> webManagers = webManagerService.queryWebManagers(webManager);
+            List<WebManager> webManagers = webManagerService.queryWebManagerAll(webManager);
             serviceResult = new ServiceResult(true, JSON.toJSONString(webManagers));
         }catch (Exception e){
             logger.error("查询信息出错",e);

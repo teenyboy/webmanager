@@ -8,7 +8,7 @@
         $(document).on("pagecreate", "#webContent", function () {
             var content = $("#content").val();
             var title = $("#title").val();
-            var html = '<h1 style="margin-bottom: 10px;text-align: center;">'+title+'</h1>'+content;
+            var html = '<h1  style="background-color:#ffffff;padding-right:14px;padding-top:14px;padding-left:20px;text-align: left;font-family:microsoft yahei;font-size: 20px;font-weight:normal;">'+title+'</h1>'+'<div style="background-image: url(/frame/bg6.jpg);background-size: 100%;background-repeat:repeat-y ;"><div style="padding-left: 20px;padding-right: 20px">'+content+'</div></div>';
             $("#contentView").append(html);
         });
     </script>
@@ -20,7 +20,7 @@
             <h1 style="margin: 0%;">自贡市自流井区就业服务管理局</h1>
         </div>
 
-        <div data-role="main" class="ui-content" >
+        <div data-role="main" class="ui-content" style="padding: 0px;">
             <div id="contentView" style="width: 100%">
             </div>
         </div>

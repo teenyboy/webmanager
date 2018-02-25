@@ -24,6 +24,8 @@ public interface WebManagerMapper {
 
     List<WebManager> queryWebManagers(WebManager webManager);
 
+    List<WebManager> queryWebManagerAll(WebManager webManager);
+
     Integer queryWebManagerCount(WebManager webManager);
 
     WebManager queryNewWebManager(WebManager webManager);
